@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            background: #f3f5f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 110px;
+            /* sekalian diperbesar */
+            background: #f3f5f9;
+            position: fixed;
+            top: 100px;
+            /* beri jarak dari navbar */
+            left: 20px;
+            /* JARAK DARI KIRI */
+            height: calc(100vh - 120px);
+            /* sesuaikan */
+            border-radius: 25px;
+            /* supaya tidak kotak */
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            box-shadow: none;
+        }
+
+        .sidebar .icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            background: #eef1f6;
+            /* abu soft */
+            color: #9aa4b2;
+            /* icon abu */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .icon.active {
+            background: #ffffff;
+            color: #275fcf;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .sidebar .icon:hover {
+            background: #e0e6f5;
+            color: #4b5563;
+        }
+
+        /* Main wrapper */
+        .main {
+            margin-left: 160px;
+            margin-top: 100px;
+            padding: 30px;
+            /* tambahkan ini */
+        }
+
+        /* Cards */
+        .card-custom {
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            padding: 25px !important;
+        }
+
+
+        /* Activity left card */
+
+
+        .activity-chart {
+            height: 120px;
+            background: linear-gradient(180deg, #6c63ff 40%, #dfe3ff 40%);
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        /* Balance gradient */
+        .points-box {
+            background: linear-gradient(135deg, #d5eef6, #c1e5ef);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .money-box {
+            background: linear-gradient(135deg, #f8f1c7, #f3e79a);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        /* News */
+        .news-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Recent activity */
+        .table thead {
+            font-size: 13px;
+            color: #9aa4b2;
+        }
+
+        .table td {
+            vertical-align: middle;
+            padding: 18px 10px;
+        }
+
+        .badge-soft {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .badge-blue {
+            background: #e4f0ff;
+            color: #3b82f6;
+        }
+
+        .badge-orange {
+            background: #fff2e5;
+            color: #f97316;
+        }
+
+        .badge-purple {
+            background: #f3e8ff;
+            color: #a855f7;
+        }
+
+        .history-btn {
+            background: #111827;
+            color: white;
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 13px;
+        }
+
+        .navbar {
+            z-index: 10;
+        }
+
+        .activity-wrapper {
+            height: 130px;
+        }
+
+        .y-axis,
+        .bars {
+            height: 110px;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .bar {
+            width: 40px;
+            background: #d6d9df;
+            border-radius: 20px;
+            transition: 0.3s ease;
+        }
+
+        .bar:hover {
+            background: #6c63ff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TOP NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white px-4 py-3 shadow-sm fixed top">
+        <div class="container-fluid">
+
+            <!-- Left Logo -->
+            <div class="d-flex align-items-center gap-2">
+                <div style="width:35px;height:35px;background:#6c63ff;border-radius:50%;"></div>
+                <div>
+                    <div class="fw-bold">Bank</div>
+                    <div class="fw-bold">Sampah</div>
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav gap-4">
+                    <li class="nav-item">
+                        <a class="nav-link text-muted fw-semibold" href="#">Deposit Trash</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted fw-semibold" href="#">Exchange Points</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted fw-semibold" href="#">Withdraw Money</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Side -->
+            <div class="d-flex align-items-center gap-3">
+
+                <!-- Search -->
+                <input type="text" class="form-control rounded-pill bg-light border-0" placeholder="Search"
+                    style="width:250px;">
+
+                <!-- Notification -->
+                <div
+                    style="width:40px;height:40px;background:#f0f2f7;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                    🔔
+                </div>
+
+                <!-- Profile -->
+                <div class="d-flex align-items-center gap-2">
+                    <div style="width:40px;height:40px;background:#c97b42;border-radius:50%;"></div>
+                    <div>
+                        <div class="fw-bold small">Matt Shadows</div>
+                        <div class="text-muted small">Joined 3 Months ago</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="icon active">▦</div>
+        <div class="icon">👤</div>
+        <div class="icon">📄</div>
+        <div class="icon">👥</div>
+        <div class="icon">⚙</div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Top -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h2 class="fw-bold">Good Morning, Matt!</h2>
+                <div class="text-muted">Ready to save the environment again?</div>
+            </div>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Left Activity -->
+            <div class="col-lg-4">
+                <div class="card card-custom p-4 activity-card">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="fw-bold">Total Activity</h5>
+                            <small class="text-muted">See How Much You Contribute!</small>
+                        </div>
+                        <small class="text-primary">SEE MORE ></small>
+                    </div>
+
+                    <div class="mt-3">
+                        <h1 class="text-primary fw-bold">85%</h1>
+                        <small class="text-muted">BETTER THAN LAST MONTH</small>
+                    </div>
+
+                    <div class="activity-wrapper mt-3">
+
+                        <div class="d-flex align-items-end">
+
+                            <!-- Y Axis -->
+                            <div class="y-axis me-3 text-muted">
+                                <div>100</div>
+                                <div>75</div>
+                                <div>50</div>
+                                <div>25</div>
+                                <div>0</div>
+                            </div>
+
+                            <!-- Bars -->
+                            <div class="bars d-flex align-items-end gap-4">
+
+                                <div class="bar-group text-center">
+                                    <div class="bar" style="height:80px;"></div>
+                                    <small>1-7</small>
+                                </div>
+
+                                <div class="bar-group text-center">
+                                    <div class="bar" style="height:120px;"></div>
+                                    <small>8-14</small>
+                                </div>
+
+                                <div class="bar-group text-center">
+                                    <div class="bar" style="height:85px;"></div>
+                                    <small>14-21</small>
+                                </div>
+
+                                <div class="bar-group text-center">
+                                    <div class="bar" style="height:120px;"></div>
+                                    <small>21-30</small>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-3">
+                        <div class="p-3 rounded-4 bg-light d-flex justify-content-between">
+                            <span>Goals</span>
+                            <span>›</span>
+                        </div>
+                        <div class="p-3 rounded-4 bg-light d-flex justify-content-between mt-4">
+                            <span>Monthly Plan</span>
+                            <span>›</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="col-lg-8">
+
+                <!-- Balance -->
+                <div class="card card-custom p-4 mb-4">
+                    <h5 class="fw-bold">Balance Overview</h5>
+                    <small class="text-muted">Exchange or withdraw your earnings!</small>
+
+                    <div class="row mt-3 g-3">
+                        <div class="col-md-6">
+                            <div class="points-box">
+                                <div class="text-muted">Points</div>
+                                <h3 class="fw-bold mt-2">200 Pts</h3>
+                                <button class="btn btn-light btn-sm mt-2">Exchange</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="money-box">
+                                <div class="text-muted">Money</div>
+                                <h3 class="fw-bold mt-2">Rp 200.000</h3>
+                                <button class="btn btn-light btn-sm mt-2">Withdraw</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News -->
+                <div class="card card-custom p-4 mb-4">
+                    <h5 class="fw-bold">Trending News</h5>
+                    <small class="text-muted">Updates from your community</small>
+
+                    <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231" class="news-img mt-4">
+
+                    <div class="mt-4">
+                        <span class="badge bg-primary">COMMUNITY</span>
+                        <h5 class="mt-2 fw-bold">New Recycling Center Opens in Bandung</h5>
+                        <small class="text-muted">Residents can now bring e-waste starting next Monday...</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card card-custom p-4 mt-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="fw-bold">Recent Activity</h5>
+                    <small class="text-muted">View your recent transactions and impact</small>
+                </div>
+                <button class="history-btn">History</button>
+            </div>
+
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>NAME/BUSINESS</th>
+                            <th>DATE</th>
+                            <th>ACTIVITY TYPE</th>
+                            <th>POINTS</th>
+                            <th>AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Plastic Donation</td>
+                            <td>28 Dec 2025</td>
+                            <td><span class="badge-soft badge-blue">Recycling</span></td>
+                            <td class="text-success">+200</td>
+                            <td>Rp 20.000</td>
+                        </tr>
+                        <tr>
+                            <td>Grocery Rewards</td>
+                            <td>27 Dec 2025</td>
+                            <td><span class="badge-soft badge-orange">Exchange</span></td>
+                            <td class="text-danger">-50</td>
+                            <td>Rp 0</td>
+                        </tr>
+                        <tr>
+                            <td>Cash Withdrawal</td>
+                            <td>25 Dec 2025</td>
+                            <td><span class="badge-soft badge-purple">Withdraw</span></td>
+                            <td>0</td>
+                            <td>-Rp 50.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

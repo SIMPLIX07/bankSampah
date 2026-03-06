@@ -10,8 +10,15 @@
     <title>Dashboard</title>
 
     <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #E8F5E9;
+            --accent: #2F855A;
+            --background: #F4F7F4;
+        }
+
         body {
-            background: #f3f5f9;
+            background: #ffff;
             font-family: 'Segoe UI', sans-serif;
         }
 
@@ -19,7 +26,7 @@
         .sidebar {
             width: 110px;
             /* sekalian diperbesar */
-            background: #f3f5f9;
+            background: #ffff;
             position: fixed;
             top: 100px;
             /* beri jarak dari navbar */
@@ -45,24 +52,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 15px 0;
-            background: #eef1f6;
-            /* abu soft */
-            color: #9aa4b2;
-            /* icon abu */
+            margin: 18px 0;
+            background: var(--primary-light);
+            color: var(--primary);
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 25px;
+            /* BESARKAN ICON */
         }
 
         .sidebar .icon.active {
-            background: #ffffff;
-            color: #275fcf;
+            background: white;
+            color: var(--primary);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         .sidebar .icon:hover {
-            background: #e0e6f5;
-            color: #4b5563;
+            background: var(--primary-light);
+            color: var(--accent);
         }
 
         /* Main wrapper */
@@ -77,9 +84,20 @@
         .card-custom {
             border: none;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
             padding: 25px !important;
-            
+            background: white;
+
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.04),
+                0 10px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-custom:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.06),
+                0 20px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.25s ease;
         }
 
 
@@ -98,12 +116,18 @@
             background: linear-gradient(135deg, #d5eef6, #c1e5ef);
             border-radius: 20px;
             padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
         }
 
         .money-box {
             background: linear-gradient(135deg, #f8f1c7, #f3e79a);
             border-radius: 20px;
             padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .p-3.rounded-4.bg-light {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         /* News */
@@ -159,12 +183,13 @@
         }
 
         .activity-wrapper {
-            height: 130px;
+            height: 160px;
         }
 
         .y-axis,
         .bars {
-            height: 110px;
+            height: 130px;
+            align-items: flex-end;
         }
 
         .bar-group {
@@ -184,7 +209,13 @@
         .bar:hover {
             background: #6c63ff;
         }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
     </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -244,11 +275,19 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="icon active">▦</div>
-        <div class="icon">👤</div>
-        <div class="icon">📄</div>
-        <div class="icon">👥</div>
-        <div class="icon">⚙</div>
+
+        <a href="/" class="icon active text-decoration-none" title="Home">
+            <i class="bi bi-house"></i>
+        </a>
+
+        <a href="/komunitas" class="icon text-decoration-none" title="Komunitas">
+            <i class="bi bi-people"></i>
+        </a>
+
+        <a href="/berita" class="icon text-decoration-none" title="Berita">
+            <i class="bi bi-newspaper"></i>
+        </a>
+
     </div>
 
     <!-- Main -->
@@ -257,8 +296,8 @@
         <!-- Top -->
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
-                <h2 class="fw-bold">Good Morning, Matt!</h2>
-                <div class="text-muted">Ready to save the environment again?</div>
+                <h2 class="fw-bold">Selamat Pagi, Matt!</h2>
+                <div class="text-muted">Siap untuk membuat bumi lebih baik lagi?</div>
             </div>
 
         </div>
@@ -270,18 +309,18 @@
                 <div class="card card-custom p-4 activity-card">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="fw-bold">Total Activity</h5>
-                            <small class="text-muted">See How Much You Contribute!</small>
+                            <h5 class="fw-bold">Total Aktifitas</h5>
+                            <small class="text-muted">Lihat seberapa banyak kontribusi Anda!</small>
                         </div>
-                        <small class="text-primary">SEE MORE ></small>
+                        <small class="text-primary">Selengkapnya ></small>
                     </div>
 
                     <div class="mt-3">
                         <h1 class="text-primary fw-bold">85%</h1>
-                        <small class="text-muted">BETTER THAN LAST MONTH</small>
+                        <small class="text-muted">Lebih baik dari bulan lalu</small>
                     </div>
 
-                    <div class="activity-wrapper mt-3">
+                    <div class="activity-wrapper mt-4">
 
                         <div class="d-flex align-items-end">
 
@@ -329,7 +368,7 @@
                             <span>›</span>
                         </div>
                         <div class="p-3 rounded-4 bg-light d-flex justify-content-between mt-4">
-                            <span>Monthly Plan</span>
+                            <span>Rencana bulanan</span>
                             <span>›</span>
                         </div>
                     </div>
@@ -342,21 +381,21 @@
                 <!-- Balance -->
                 <div class="card card-custom p-4 mb-4">
                     <h5 class="fw-bold">Balance Overview</h5>
-                    <small class="text-muted">Exchange or withdraw your earnings!</small>
+                    <small class="text-muted">Tukarkan atau tarik dana Anda!</small>
 
                     <div class="row mt-3 g-3">
                         <div class="col-md-6">
                             <div class="points-box">
-                                <div class="text-muted">Points</div>
+                                <div class="text-muted">Point anda</div>
                                 <h3 class="fw-bold mt-2">200 Pts</h3>
-                                <button class="btn btn-light btn-sm mt-2">Exchange</button>
+                                <button class="btn btn-light btn-sm mt-2">Tukar</button>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="money-box">
-                                <div class="text-muted">Money</div>
+                                <div class="text-muted">Uang anda</div>
                                 <h3 class="fw-bold mt-2">Rp 200.000</h3>
-                                <button class="btn btn-light btn-sm mt-2">Withdraw</button>
+                                <button class="btn btn-light btn-sm mt-2">Tarik</button>
                             </div>
                         </div>
                     </div>
@@ -364,13 +403,13 @@
 
                 <!-- News -->
                 <div class="card card-custom p-4 mb-4">
-                    <h5 class="fw-bold">Trending News</h5>
-                    <small class="text-muted">Updates from your community</small>
+                    <h5 class="fw-bold">Berita Terpopuler</h5>
+                    <small class="text-muted">Pembaruan dari komunitas Anda</small>
 
                     <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231" class="news-img mt-4">
 
                     <div class="mt-4">
-                        <span class="badge bg-primary">COMMUNITY</span>
+                        <span class="badge bg-primary">Komunitas</span>
                         <h5 class="mt-2 fw-bold">New Recycling Center Opens in Bandung</h5>
                         <small class="text-muted">Residents can now bring e-waste starting next Monday...</small>
                     </div>
@@ -383,8 +422,8 @@
         <div class="card card-custom p-4 mt-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="fw-bold">Recent Activity</h5>
-                    <small class="text-muted">View your recent transactions and impact</small>
+                    <h5 class="fw-bold">Aktifitas terbaru</h5>
+                    <small class="text-muted">Lihat aktivitas terbaru Anda disini</small>
                 </div>
                 <button class="history-btn">History</button>
             </div>
@@ -394,10 +433,10 @@
                     <thead>
                         <tr>
                             <th>NAME/BUSINESS</th>
-                            <th>DATE</th>
-                            <th>ACTIVITY TYPE</th>
-                            <th>POINTS</th>
-                            <th>AMOUNT</th>
+                            <th>Tanggal</th>
+                            <th>Tipe AKtifitas</th>
+                            <th>POINT</th>
+                            <th>UANG</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Berita Lingkungan</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f3f5f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            z-index: 10;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 110px;
+            background: #f3f5f9;
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            height: calc(100vh - 120px);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar .icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            background: #eef1f6;
+            color: #9aa4b2;
+            text-decoration: none;
+        }
+
+        .sidebar .icon.active {
+            background: #ffffff;
+            color: #275fcf;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Main */
+        .main {
+            margin-left: 160px;
+            margin-top: 100px;
+            padding: 30px;
+        }
+
+        .news-card {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .news-title {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .news-date {
+            font-size: 13px;
+            color: #9aa4b2;
+        }
+
+        /* Gambar tidak terlalu besar */
+        .news-img {
+            width: 100%;
+            max-height: 320px;
+            /* BATAS TINGGI */
+            object-fit: cover;
+            /* supaya tidak gepeng */
+            border-radius: 12px;
+            margin: 12px 0;
+        }
+
+        .news-content {
+            font-size: 14px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white px-4 py-3 shadow-sm fixed-top">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center gap-2">
+                <div style="width:35px;height:35px;background:#6c63ff;border-radius:50%;"></div>
+                <div>
+                    <div class="fw-bold">Bank</div>
+                    <div class="fw-bold">Sampah</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+
+        <a href="/" class="icon text-decoration-none">
+            🏠
+        </a>
+
+        <a href="/komunitas" class="icon text-decoration-none">
+            👥
+        </a>
+
+        <a href="/berita" class="icon active text-decoration-none">
+            📰
+        </a>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <h4 class="fw-bold mb-4">Berita Lingkungan Indonesia</h4>
+
+        <!-- BERITA 1 -->
+        <div class="card news-card p-3 mb-4">
+            <div class="news-title">
+                Banjir Bandang Akibat Kali Tersumbat Sampah
+            </div>
+            <div class="news-date">3 Maret 2026 • Jawa Barat</div>
+
+            <img src="https://images.unsplash.com/photo-1601132359864-8c7d7bbf9b7b" class="news-img" alt="Banjir">
+
+            <div class="news-content">
+                <p>
+                    Hujan deras yang mengguyur wilayah Bandung selama beberapa jam
+                    menyebabkan banjir bandang di sejumlah pemukiman warga.
+                    Salah satu penyebab utama adalah saluran air yang tersumbat
+                    oleh tumpukan sampah rumah tangga.
+                </p>
+
+                <p>
+                    Pemerintah daerah bersama relawan melakukan pembersihan
+                    aliran sungai dan mengimbau masyarakat untuk lebih disiplin
+                    dalam pengelolaan sampah guna mencegah kejadian serupa.
+                </p>
+            </div>
+        </div>
+
+        <!-- BERITA 2 -->
+        <div class="card news-card p-3 mb-4">
+            <div class="news-title">
+                Longsor Terjadi Akibat Penebangan Liar
+            </div>
+            <div class="news-date">1 Maret 2026 • Sumatera Barat</div>
+
+            <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232" class="news-img" alt="Longsor">
+
+            <div class="news-content">
+                <p>
+                    Tanah longsor melanda kawasan perbukitan setelah hujan deras
+                    mengguyur wilayah tersebut. Minimnya vegetasi penahan tanah
+                    akibat aktivitas penebangan liar diduga menjadi faktor utama.
+                </p>
+
+                <p>
+                    Warga diimbau untuk tidak beraktivitas di area rawan longsor
+                    dan mendukung program reboisasi yang tengah dilakukan
+                    pemerintah setempat.
+                </p>
+            </div>
+        </div>
+
+        <!-- BERITA 3 -->
+        <div class="card news-card p-3">
+            <div class="news-title">
+                Pencemaran Sungai Meningkat Akibat Limbah Rumah Tangga
+            </div>
+            <div class="news-date">27 Februari 2026 • Jakarta</div>
+
+            <div class="news-content">
+                <p>
+                    Tingkat pencemaran sungai di wilayah perkotaan meningkat
+                    akibat pembuangan limbah rumah tangga secara langsung ke aliran air.
+                    Kondisi ini mengancam ekosistem dan kesehatan masyarakat.
+                </p>
+
+                <p>
+                    Program edukasi pengelolaan sampah dan limbah cair menjadi
+                    langkah penting untuk menjaga kualitas air dan lingkungan hidup.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

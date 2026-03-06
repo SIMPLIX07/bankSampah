@@ -1,0 +1,29 @@
+<!-- ===== LANDING NAVBAR COMPONENT ===== -->
+<nav class="landing-nav" id="landingNav">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <i class="bi bi-recycle"></i>
+                </div>
+                <span class="nav-logo-text">BankSampah</span>
+            </a>
+
+            <div class="d-none d-lg-flex align-items-center gap-1">
+                <a href="/#cara-kerja" class="nav-link">Cara Kerja</a>
+                <a href="/#jenis-sampah" class="nav-link">Jenis Sampah</a>
+                <a href="/#kalkulator" class="nav-link">Kalkulator</a>
+                <a href="/#testimoni" class="nav-link">Testimoni</a>
+                <a href="/about" class="nav-link <%= activePage === 'about' ? 'nav-link-active' : '' %>">Tentang
+                    Kami</a>
+                <a href="/contact" class="nav-link <%= activePage === 'contact' ? 'nav-link-active' : '' %>">Kontak</a>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                <a href="/dashboard" class="btn-masuk">Masuk</a>
+                <a href="/dashboard" class="btn-daftar">Daftar Sekarang</a>
+            </div>
+        </div>
+    </div>
+</nav>

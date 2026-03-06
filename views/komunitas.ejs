@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Community - Bank Sampah</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f3f5f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            z-index: 1000;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 110px;
+            background: #f3f5f9;
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            height: calc(100vh - 120px);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar .icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            background: #eef1f6;
+            color: #9aa4b2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .icon.active {
+            background: #ffffff;
+            color: #275fcf;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .main {
+            margin-left: 160px;
+            margin-top: 100px;
+            padding: 30px;
+        }
+
+        .card-custom {
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            padding: 25px;
+        }
+
+        .post-card {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .right-panel-card {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #c97b42;
+        }
+
+        .trend-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .trend-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white px-4 py-3 shadow-sm fixed-top">
+        <div class="container-fluid">
+
+            <div class="d-flex align-items-center gap-2">
+                <div style="width:35px;height:35px;background:#6c63ff;border-radius:50%;"></div>
+                <div>
+                    <div class="fw-bold">Bank</div>
+                    <div class="fw-bold">Sampah</div>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+
+                <input type="text" class="form-control rounded-pill bg-light border-0" placeholder="Search Community..."
+                    style="width:250px;">
+
+                <div
+                    style="width:40px;height:40px;background:#f0f2f7;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                    🔔
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div style="width:40px;height:40px;background:#c97b42;border-radius:50%;"></div>
+                    <div>
+                        <div class="fw-bold small">Matt Shadows</div>
+                        <div class="text-muted small">Member</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+
+        <a href="/" class="icon text-decoration-none">
+            🏠
+        </a>
+
+        <a href="/komunitas" class="icon active text-decoration-none">
+            👥
+        </a>
+
+        <a href="/berita" class="icon text-decoration-none">
+            📰
+        </a>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+        <div class="row g-4">
+
+            <!-- FEED -->
+            <div class="col-lg-8">
+
+                <!-- Create Post -->
+                <div class="card card-custom mb-4">
+                    <div class="d-flex gap-3 align-items-center">
+                        <div class="profile-circle"></div>
+                        <input type="text" class="form-control rounded-pill"
+                            placeholder="Share something about recycling today...">
+                        <button class="btn btn-primary rounded-pill">Post</button>
+                    </div>
+                </div>
+
+                <!-- Post 1 -->
+                <div class="card post-card p-4 mb-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="profile-circle"></div>
+                        <div>
+                            <div class="fw-bold">Budi Santoso</div>
+                            <small class="text-muted">2 hours ago</small>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold">Tips memilah sampah plastik di rumah</h5>
+                    <p class="text-muted">
+                        Jangan campur plastik kotor dengan plastik bersih. Pisahkan berdasarkan jenis
+                        agar proses daur ulang lebih efektif.
+                    </p>
+
+                    <div class="d-flex gap-4 text-muted small">
+                        <div>👍 120</div>
+                        <div>💬 35</div>
+                        <div>🔁 12</div>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="card post-card p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="profile-circle"></div>
+                        <div>
+                            <div class="fw-bold">Siti Rahma</div>
+                            <small class="text-muted">Yesterday</small>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold">Bank Sampah Kelurahan Baru Dibuka 🎉</h5>
+                    <p class="text-muted">
+                        Mulai minggu depan warga bisa setor sampah setiap hari Sabtu.
+                        Yuk dukung lingkungan yang lebih bersih!
+                    </p>
+
+                    <div class="d-flex gap-4 text-muted small">
+                        <div>👍 230</div>
+                        <div>💬 54</div>
+                        <div>🔁 30</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="col-lg-4">
+
+                <!-- Trending -->
+                <div class="card right-panel-card p-4 mb-4">
+                    <h6 class="fw-bold mb-3">Trending Topics</h6>
+
+                    <div class="trend-item">
+                        <div class="fw-semibold">♻ Recycling</div>
+                        <small class="text-muted">8.5% activity</small>
+                    </div>
+
+                    <div class="trend-item">
+                        <div class="fw-semibold">🌱 Eco Lifestyle</div>
+                        <small class="text-muted">6.2% activity</small>
+                    </div>
+
+                    <div class="trend-item">
+                        <div class="fw-semibold">🏘 Community Event</div>
+                        <small class="text-muted">5.1% activity</small>
+                    </div>
+
+                    <div class="trend-item">
+                        <div class="fw-semibold">🧴 Plastic Reduction</div>
+                        <small class="text-muted">4.4% activity</small>
+                    </div>
+                </div>
+
+                <!-- Suggested Community -->
+                <div class="card right-panel-card p-4">
+                    <h6 class="fw-bold mb-3">Suggested Community</h6>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <div class="fw-semibold">Green Bandung</div>
+                            <small class="text-muted">2.3k Members</small>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill">Join</button>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="fw-semibold">Zero Waste Indonesia</div>
+                            <small class="text-muted">5.8k Members</small>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill">Join</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

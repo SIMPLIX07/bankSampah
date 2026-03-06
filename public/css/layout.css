@@ -1,0 +1,170 @@
+/* =============================================
+   SHARED LAYOUT CSS — Navbar & Sidebar
+   Bank Sampah Project
+   ============================================= */
+
+:root {
+    --primary: #2E7D32;
+    --primary-light: #E8F5E9;
+    --accent: #2F855A;
+}
+
+/* ---- NAVBAR ---- */
+.bs-navbar {
+    z-index: 100;
+    height: 68px;
+}
+
+.bs-navbar .nav-link {
+    position: relative;
+    font-size: 14px;
+}
+
+.bs-navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.bs-navbar .nav-link:hover::after,
+.bs-navbar .nav-link.active-link::after {
+    transform: scaleX(1);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f4f5f7;
+    border-radius: 30px;
+    padding: 6px 14px;
+    gap: 8px;
+    width: 220px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #374151;
+    width: 100%;
+}
+
+.search-box i {
+    color: #9aa4b2;
+    font-size: 15px;
+}
+
+.avatar-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #c97b42;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.notif-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f4f5f7;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.notif-btn:hover {
+    background: var(--primary-light);
+}
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+    width: 72px;
+    background: #ffffff;
+    position: fixed;
+    top: 80px;
+    left: 16px;
+    height: calc(100vh - 100px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    gap: 8px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    z-index: 9;
+}
+
+.sidebar .icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9aa4b2;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 20px;
+    text-decoration: none;
+    position: relative;
+}
+
+.sidebar .icon:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.sidebar .icon.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(46, 125, 50, 0.35);
+}
+
+/* Tooltip */
+.sidebar .icon::after {
+    content: attr(title);
+    position: absolute;
+    left: 58px;
+    background: #1e293b;
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.sidebar .icon:hover::after {
+    opacity: 1;
+}
+
+.sidebar-spacer {
+    flex: 1;
+}
+
+/* ---- MAIN CONTENT OFFSET ---- */
+.main-content {
+    margin-left: 112px;
+    margin-top: 90px;
+    padding: 30px;
+}

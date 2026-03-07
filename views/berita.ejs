@@ -1,48 +1,536 @@
-<!doctype html>
-<html lang="en">
+﻿<!doctype html>
+<html lang="id">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Berita Lingkungan</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/css/layout.css">
+    <title>Berita Lingkungan — Bank Sampah</title>
 
     <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-dark: #1B5E20;
+            --primary-light: #E8F5E9;
+            --primary-mid: #43A047;
+            --accent: #00BFA5;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --bg-light: #F3F7F3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background: #f3f5f9;
-            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg-light);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
-        .news-card {
-            border-radius: 20px;
-            border: none;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        /* HERO */
+        .hero-banner {
+            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 45%, #388E3C 75%, #00695C 100%);
+            border-radius: 28px;
+            padding: 36px 40px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            color: white;
         }
 
-        .news-title {
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 280px;
+            height: 280px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: 120px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 30px;
+            padding: 5px 14px;
+            font-size: 12px;
             font-weight: 600;
-            font-size: 18px;
+            letter-spacing: 0.3px;
+            margin-bottom: 14px;
         }
 
-        .news-date {
-            font-size: 13px;
-            color: #9aa4b2;
+        .hero-greeting {
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 6px;
         }
 
-        .news-img {
-            width: 100%;
-            max-height: 320px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin: 12px 0;
-        }
-
-        .news-content {
+        .hero-sub {
             font-size: 14px;
-            color: #6b7280;
+            opacity: 0.8;
+            margin-bottom: 28px;
+        }
+
+        .hero-mini-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 12px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-stat-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .hero-stat-val {
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .hero-stat-lbl {
+            font-size: 11px;
+            opacity: 0.75;
+            font-weight: 500;
+        }
+
+        /* CARD */
+        .card-custom {
+            border: none;
+            border-radius: 24px;
+            background: white;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.25s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+        }
+
+        /* SECTION LABEL */
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        /* FILTER / CATEGORY TABS */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1.5px solid #e5e7eb;
+            background: white;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* FEATURED NEWS CARD */
+        .news-featured {
+            border: none;
+            border-radius: 24px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.25s ease;
+            margin-bottom: 28px;
+        }
+
+        .news-featured:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-featured-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .news-featured-body {
+            padding: 28px;
+        }
+
+        .news-featured-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .news-featured-excerpt {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .news-featured-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* NEWS TAG */
+        .news-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 13px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .news-tag.bencana {
+            background: #FFEBEE;
+            color: #C62828;
+        }
+
+        .news-tag.edukasi {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .news-tag.kebijakan {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .news-tag.inovasi {
+            background: #FFF8E1;
+            color: #F9A825;
+        }
+
+        .news-tag.komunitas {
+            background: #F3E5F5;
+            color: #6A1B9A;
+        }
+
+        /* NEWS DATE / SOURCE META */
+        .news-meta-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .news-meta-info i {
+            font-size: 13px;
+        }
+
+        /* BTN READ */
+        .btn-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+            color: white;
+            text-decoration: none;
+            padding: 9px 22px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: opacity 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-read:hover {
+            opacity: 0.88;
+            color: white;
+        }
+
+        /* STANDARD NEWS CARD */
+        .news-card {
+            border: none;
+            border-radius: 24px;
+            background: white;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transition: all 0.25s ease;
+            height: 100%;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .news-card-body {
+            padding: 20px;
+        }
+
+        .news-card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-card-excerpt {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #F3F7F3;
+        }
+
+        /* LIST NEWS (sidebar-style) */
+        .news-list-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #F3F7F3;
+            transition: background 0.15s;
+            cursor: pointer;
+        }
+
+        .news-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-list-item:hover .news-list-title {
+            color: var(--primary);
+        }
+
+        .news-list-img {
+            width: 72px;
+            height: 72px;
+            border-radius: 14px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .news-list-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 5px;
+            transition: color 0.2s;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-list-date {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* PANEL CARD */
+        .panel-card {
+            background: white;
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            padding: 22px;
+            margin-bottom: 20px;
+            transition: all 0.25s ease;
+        }
+
+        .panel-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-title-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: var(--primary);
+        }
+
+        /* ECO STAT CARDS */
+        .eco-stat-card {
+            border-radius: 20px;
+            padding: 20px 22px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .eco-stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .eco-stat-card.green {
+            background: linear-gradient(135deg, #2E7D32, #43A047);
+        }
+
+        .eco-stat-card.teal {
+            background: linear-gradient(135deg, #00695C, #00897B);
+        }
+
+        .eco-stat-card.red {
+            background: linear-gradient(135deg, #B71C1C, #E53935);
+        }
+
+        .eco-stat-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+
+        .eco-stat-val {
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .eco-stat-lbl {
+            font-size: 12px;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        /* FADE IN */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .fade-in:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.10s;
+        }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.20s;
+        }
+
+        .fade-in:nth-child(5) {
+            animation-delay: 0.25s;
         }
     </style>
 </head>
@@ -51,84 +539,400 @@
     <%- include('./components/navbar', { activePage: 'berita' }) %>
         <%- include('./components/sidebar', { activePage: 'berita' }) %>
 
-            <!-- MAIN CONTENT -->
             <div class="main-content">
 
-                <h4 class="fw-bold mb-4">Berita Lingkungan Indonesia</h4>
-
-
-                <!-- BERITA 1 -->
-                <div class="card news-card p-3 mb-4">
-                    <div class="news-title">
-                        Banjir Bandang Akibat Kali Tersumbat Sampah
+                <!-- HERO -->
+                <div class="hero-banner fade-in">
+                    <div class="hero-badge">
+                        <i class="bi bi-newspaper"></i> Berita Lingkungan
                     </div>
-                    <div class="news-date">3 Maret 2026 • Jawa Barat</div>
-
-                    <img src="https://images.unsplash.com/photo-1601132359864-8c7d7bbf9b7b" class="news-img"
-                        alt="Banjir">
-
-                    <div class="news-content">
-                        <p>
-                            Hujan deras yang mengguyur wilayah Bandung selama beberapa jam
-                            menyebabkan banjir bandang di sejumlah pemukiman warga.
-                            Salah satu penyebab utama adalah saluran air yang tersumbat
-                            oleh tumpukan sampah rumah tangga.
-                        </p>
-
-                        <p>
-                            Pemerintah daerah bersama relawan melakukan pembersihan
-                            aliran sungai dan mengimbau masyarakat untuk lebih disiplin
-                            dalam pengelolaan sampah guna mencegah kejadian serupa.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- BERITA 2 -->
-                <div class="card news-card p-3 mb-4">
-                    <div class="news-title">
-                        Longsor Terjadi Akibat Penebangan Liar
-                    </div>
-                    <div class="news-date">1 Maret 2026 • Sumatera Barat</div>
-
-                    <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232" class="news-img"
-                        alt="Longsor">
-
-                    <div class="news-content">
-                        <p>
-                            Tanah longsor melanda kawasan perbukitan setelah hujan deras
-                            mengguyur wilayah tersebut. Minimnya vegetasi penahan tanah
-                            akibat aktivitas penebangan liar diduga menjadi faktor utama.
-                        </p>
-
-                        <p>
-                            Warga diimbau untuk tidak beraktivitas di area rawan longsor
-                            dan mendukung program reboisasi yang tengah dilakukan
-                            pemerintah setempat.
-                        </p>
+                    <div class="hero-greeting">Kabar Terkini Bumi Kita 🌍</div>
+                    <div class="hero-sub">Tetap update dengan isu lingkungan, inovasi daur ulang, dan kebijakan hijau
+                        terbaru.</div>
+                    <div class="hero-mini-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon"><i class="bi bi-newspaper"></i></div>
+                            <div>
+                                <div class="hero-stat-val">24</div>
+                                <div class="hero-stat-lbl">Berita Hari Ini</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon"><i class="bi bi-fire"></i></div>
+                            <div>
+                                <div class="hero-stat-val">8</div>
+                                <div class="hero-stat-lbl">Trending</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon"><i class="bi bi-bookmark-fill"></i></div>
+                            <div>
+                                <div class="hero-stat-val">3</div>
+                                <div class="hero-stat-lbl">Tersimpan</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- BERITA 3 -->
-                <div class="card news-card p-3">
-                    <div class="news-title">
-                        Pencemaran Sungai Meningkat Akibat Limbah Rumah Tangga
+                <!-- ECO STAT CARDS -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4 fade-in">
+                        <div class="eco-stat-card green">
+                            <div class="eco-stat-icon"><i class="bi bi-recycle"></i></div>
+                            <div class="eco-stat-val">+18%</div>
+                            <div class="eco-stat-lbl">Peningkatan Daur Ulang Nasional</div>
+                        </div>
                     </div>
-                    <div class="news-date">27 Februari 2026 • Jakarta</div>
-
-                    <div class="news-content">
-                        <p>
-                            Tingkat pencemaran sungai di wilayah perkotaan meningkat
-                            akibat pembuangan limbah rumah tangga secara langsung ke aliran air.
-                            Kondisi ini mengancam ekosistem dan kesehatan masyarakat.
-                        </p>
-
-                        <p>
-                            Program edukasi pengelolaan sampah dan limbah cair menjadi
-                            langkah penting untuk menjaga kualitas air dan lingkungan hidup.
-                        </p>
+                    <div class="col-md-4 fade-in">
+                        <div class="eco-stat-card teal">
+                            <div class="eco-stat-icon"><i class="bi bi-tree-fill"></i></div>
+                            <div class="eco-stat-val">2.1 jt</div>
+                            <div class="eco-stat-lbl">Pohon Ditanam Tahun Ini</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in">
+                        <div class="eco-stat-card red">
+                            <div class="eco-stat-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                            <div class="eco-stat-val">67.8 jt</div>
+                            <div class="eco-stat-lbl">Ton Sampah Terbuang 2025</div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- MAIN LAYOUT -->
+                <div class="row g-4">
+
+                    <!-- LEFT: FEED -->
+                    <div class="col-lg-8">
+
+                        <!-- Filter Tabs -->
+                        <div class="d-flex align-items-center justify-content-between mb-4 fade-in">
+                            <div class="filter-tabs">
+                                <div class="filter-tab active">Semua</div>
+                                <div class="filter-tab">Bencana</div>
+                                <div class="filter-tab">Edukasi</div>
+                                <div class="filter-tab">Kebijakan</div>
+                                <div class="filter-tab">Inovasi</div>
+                            </div>
+                            <small style="font-size:12px; color:var(--text-muted); flex-shrink:0;">24 berita</small>
+                        </div>
+
+                        <!-- FEATURED -->
+                        <div class="news-featured fade-in">
+                            <img src="https://picsum.photos/seed/flood-bandung/900/320" class="news-featured-img"
+                                alt="Banjir Bandang">
+                            <div class="news-featured-body">
+                                <div class="d-flex align-items-center gap-2 mb-3">
+                                    <span class="news-tag bencana">Bencana</span>
+                                    <span class="news-meta-info"><i class="bi bi-calendar3"></i> 3 Maret 2026</span>
+                                    <span class="news-meta-info"><i class="bi bi-geo-alt"></i> Jawa Barat</span>
+                                </div>
+                                <div class="news-featured-title">Banjir Bandang Akibat Kali Tersumbat Sampah di Bandung
+                                </div>
+                                <div class="news-featured-excerpt">
+                                    Hujan deras yang mengguyur wilayah Bandung selama beberapa jam menyebabkan banjir
+                                    bandang
+                                    di sejumlah pemukiman warga. Salah satu penyebab utama adalah saluran air yang
+                                    tersumbat
+                                    oleh tumpukan sampah rumah tangga. Pemerintah daerah bersama relawan melakukan
+                                    pembersihan
+                                    aliran sungai dan mengimbau masyarakat untuk lebih disiplin dalam pengelolaan
+                                    sampah.
+                                </div>
+                                <div class="news-featured-meta">
+                                    <a href="#" class="btn-read"><i class="bi bi-arrow-right-circle"></i> Baca
+                                        Selengkapnya</a>
+                                    <span class="news-meta-info"><i class="bi bi-eye"></i> 12.4k dilihat</span>
+                                    <span class="news-meta-info"><i class="bi bi-share"></i> 340 dibagikan</span>
+                                    <button
+                                        style="margin-left:auto; background:none; border:none; cursor:pointer; font-size:18px; color:var(--text-muted);"><i
+                                            class="bi bi-bookmark"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- GRID BERITA -->
+                        <div class="row g-4 mb-4">
+                            <!-- Berita 2 -->
+                            <div class="col-md-6 fade-in">
+                                <div class="news-card">
+                                    <img src="https://picsum.photos/seed/landslide-sumbar/600/180" class="news-card-img"
+                                        alt="Longsor">
+                                    <div class="news-card-body">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span class="news-tag bencana">Bencana</span>
+                                            <span class="news-meta-info"><i class="bi bi-calendar3"></i> 1 Mar
+                                                2026</span>
+                                        </div>
+                                        <div class="news-card-title">Longsor Terjadi Akibat Penebangan Liar di Sumbar
+                                        </div>
+                                        <div class="news-card-excerpt">
+                                            Tanah longsor melanda kawasan perbukitan setelah hujan deras. Minimnya
+                                            vegetasi penahan tanah akibat aktivitas penebangan liar diduga menjadi
+                                            faktor utama bencana ini.
+                                        </div>
+                                        <div class="news-card-footer">
+                                            <span class="news-meta-info"><i class="bi bi-geo-alt"></i> Sumatera
+                                                Barat</span>
+                                            <a href="#" class="btn-read"
+                                                style="font-size:12px; padding:6px 16px;">Baca</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Berita 3 -->
+                            <div class="col-md-6 fade-in">
+                                <div class="news-card">
+                                    <img src="https://picsum.photos/seed/river-pollution/600/180" class="news-card-img"
+                                        alt="Sungai tercemar">
+                                    <div class="news-card-body">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span class="news-tag bencana">Bencana</span>
+                                            <span class="news-meta-info"><i class="bi bi-calendar3"></i> 27 Feb
+                                                2026</span>
+                                        </div>
+                                        <div class="news-card-title">Pencemaran Sungai Meningkat Akibat Limbah Rumah
+                                            Tangga</div>
+                                        <div class="news-card-excerpt">
+                                            Tingkat pencemaran sungai di wilayah perkotaan meningkat akibat pembuangan
+                                            limbah rumah tangga secara langsung ke aliran air, mengancam ekosistem dan
+                                            kesehatan warga.
+                                        </div>
+                                        <div class="news-card-footer">
+                                            <span class="news-meta-info"><i class="bi bi-geo-alt"></i> Jakarta</span>
+                                            <a href="#" class="btn-read"
+                                                style="font-size:12px; padding:6px 16px;">Baca</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Berita 4 -->
+                            <div class="col-md-6 fade-in">
+                                <div class="news-card">
+                                    <img src="https://picsum.photos/seed/plastic-recycle/600/180" class="news-card-img"
+                                        alt="Daur ulang">
+                                    <div class="news-card-body">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span class="news-tag inovasi">Inovasi</span>
+                                            <span class="news-meta-info"><i class="bi bi-calendar3"></i> 25 Feb
+                                                2026</span>
+                                        </div>
+                                        <div class="news-card-title">Startup Sulap Sampah Plastik Jadi Aspal Jalan
+                                            Berkualitas</div>
+                                        <div class="news-card-excerpt">
+                                            Sebuah startup asal Surabaya berhasil mengembangkan teknologi pengolahan
+                                            plastik daur ulang menjadi campuran aspal yang lebih tahan lama dan ramah
+                                            lingkungan.
+                                        </div>
+                                        <div class="news-card-footer">
+                                            <span class="news-meta-info"><i class="bi bi-geo-alt"></i> Surabaya</span>
+                                            <a href="#" class="btn-read"
+                                                style="font-size:12px; padding:6px 16px;">Baca</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Berita 5 -->
+                            <div class="col-md-6 fade-in">
+                                <div class="news-card">
+                                    <img src="https://picsum.photos/seed/forest-green/600/180" class="news-card-img"
+                                        alt="Hutan">
+                                    <div class="news-card-body">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span class="news-tag kebijakan">Kebijakan</span>
+                                            <span class="news-meta-info"><i class="bi bi-calendar3"></i> 22 Feb
+                                                2026</span>
+                                        </div>
+                                        <div class="news-card-title">Pemerintah Perluas Kawasan Hutan Lindung 500 Ribu
+                                            Hektar</div>
+                                        <div class="news-card-excerpt">
+                                            Kementerian Lingkungan Hidup mengumumkan perluasan kawasan hutan lindung di
+                                            Kalimantan dan Sumatera sebagai bagian dari komitmen net-zero emission 2060.
+                                        </div>
+                                        <div class="news-card-footer">
+                                            <span class="news-meta-info"><i class="bi bi-geo-alt"></i> Nasional</span>
+                                            <a href="#" class="btn-read"
+                                                style="font-size:12px; padding:6px 16px;">Baca</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Berita 6 -->
+                            <div class="col-md-6 fade-in">
+                                <div class="news-card">
+                                    <img src="https://picsum.photos/seed/solar-panel/600/180" class="news-card-img"
+                                        alt="Energi surya">
+                                    <div class="news-card-body">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span class="news-tag inovasi">Inovasi</span>
+                                            <span class="news-meta-info"><i class="bi bi-calendar3"></i> 20 Feb
+                                                2026</span>
+                                        </div>
+                                        <div class="news-card-title">Panel Surya Murah Buatan Dalam Negeri Mulai
+                                            Diproduksi Massal</div>
+                                        <div class="news-card-excerpt">
+                                            Produsen dalam negeri meluncurkan panel surya dengan harga terjangkau,
+                                            membuka peluang lebih luas bagi rumah tangga pedesaan untuk mengakses energi
+                                            bersih.
+                                        </div>
+                                        <div class="news-card-footer">
+                                            <span class="news-meta-info"><i class="bi bi-geo-alt"></i> Jawa
+                                                Tengah</span>
+                                            <a href="#" class="btn-read"
+                                                style="font-size:12px; padding:6px 16px;">Baca</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Berita 7 -->
+                            <div class="col-md-6 fade-in">
+                                <div class="news-card">
+                                    <img src="https://picsum.photos/seed/education-kids/600/180" class="news-card-img"
+                                        alt="Edukasi anak">
+                                    <div class="news-card-body">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <span class="news-tag edukasi">Edukasi</span>
+                                            <span class="news-meta-info"><i class="bi bi-calendar3"></i> 18 Feb
+                                                2026</span>
+                                        </div>
+                                        <div class="news-card-title">Kurikulum Lingkungan Hidup Kini Masuk Pelajaran SD
+                                            dan SMP</div>
+                                        <div class="news-card-excerpt">
+                                            Kemendikbud resmi memasukkan materi pengelolaan sampah dan pelestarian
+                                            lingkungan ke dalam kurikulum wajib tingkat SD dan SMP mulai tahun ajaran
+                                            2026/2027.
+                                        </div>
+                                        <div class="news-card-footer">
+                                            <span class="news-meta-info"><i class="bi bi-geo-alt"></i> Nasional</span>
+                                            <a href="#" class="btn-read"
+                                                style="font-size:12px; padding:6px 16px;">Baca</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT PANEL -->
+                    <div class="col-lg-4">
+
+                        <!-- Cari Berita -->
+                        <div class="panel-card fade-in" style="padding:16px 22px;">
+                            <div style="position:relative;">
+                                <i class="bi bi-search"
+                                    style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-muted); font-size:14px;"></i>
+                                <input type="text" placeholder="Cari berita lingkungan..." style="
+                            width:100%; padding:10px 14px 10px 38px;
+                            border-radius:22px; border:1.5px solid #e5e7eb;
+                            font-size:13px; font-family:'Inter',sans-serif;
+                            color:var(--text-dark); outline:none; transition:border-color 0.2s;
+                        " onfocus="this.style.borderColor='#2E7D32'" onblur="this.style.borderColor='#e5e7eb'">
+                            </div>
+                        </div>
+
+                        <!-- Kategori -->
+                        <div class="panel-card fade-in">
+                            <div class="panel-title">
+                                <div class="panel-title-icon"><i class="bi bi-tag-fill"></i></div>
+                                Kategori Berita
+                            </div>
+                            <div style="display:flex; flex-direction:column; gap:8px;">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; padding:9px 14px; border-radius:14px; background:var(--bg-light); cursor:pointer;">
+                                    <span style="font-size:13px; font-weight:600; color:var(--text-dark);">🔴 Bencana
+                                        Alam</span>
+                                    <span style="font-size:12px; font-weight:700; color:var(--primary);">8</span>
+                                </div>
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; padding:9px 14px; border-radius:14px; background:var(--bg-light); cursor:pointer;">
+                                    <span style="font-size:13px; font-weight:600; color:var(--text-dark);">🌿
+                                        Edukasi</span>
+                                    <span style="font-size:12px; font-weight:700; color:var(--primary);">6</span>
+                                </div>
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; padding:9px 14px; border-radius:14px; background:var(--bg-light); cursor:pointer;">
+                                    <span style="font-size:13px; font-weight:600; color:var(--text-dark);">📋
+                                        Kebijakan</span>
+                                    <span style="font-size:12px; font-weight:700; color:var(--primary);">5</span>
+                                </div>
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; padding:9px 14px; border-radius:14px; background:var(--bg-light); cursor:pointer;">
+                                    <span style="font-size:13px; font-weight:600; color:var(--text-dark);">💡
+                                        Inovasi</span>
+                                    <span style="font-size:12px; font-weight:700; color:var(--primary);">5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Berita Terpopuler -->
+                        <div class="panel-card fade-in">
+                            <div class="panel-title">
+                                <div class="panel-title-icon"><i class="bi bi-fire"></i></div>
+                                Terpopuler
+                            </div>
+                            <div class="news-list-item">
+                                <img src="https://picsum.photos/seed/flood-bandung/150/72" class="news-list-img" alt="">
+                                <div>
+                                    <div class="news-list-title">Banjir Bandang Akibat Kali Tersumbat Sampah di Bandung
+                                    </div>
+                                    <div class="news-list-date"><i class="bi bi-eye"></i> 12.4k · 3 Mar 2026</div>
+                                </div>
+                            </div>
+                            <div class="news-list-item">
+                                <img src="https://picsum.photos/seed/plastic-recycle/150/72" class="news-list-img"
+                                    alt="">
+                                <div>
+                                    <div class="news-list-title">Startup Sulap Sampah Plastik Jadi Aspal Berkualitas
+                                    </div>
+                                    <div class="news-list-date"><i class="bi bi-eye"></i> 9.1k · 25 Feb 2026</div>
+                                </div>
+                            </div>
+                            <div class="news-list-item">
+                                <img src="https://picsum.photos/seed/forest-green/150/72" class="news-list-img" alt="">
+                                <div>
+                                    <div class="news-list-title">Pemerintah Perluas Kawasan Hutan Lindung 500 Ribu
+                                        Hektar</div>
+                                    <div class="news-list-date"><i class="bi bi-eye"></i> 7.8k · 22 Feb 2026</div>
+                                </div>
+                            </div>
+                            <div class="news-list-item">
+                                <img src="https://picsum.photos/seed/landslide-sumbar/150/72" class="news-list-img"
+                                    alt="">
+                                <div>
+                                    <div class="news-list-title">Longsor Terjadi Akibat Penebangan Liar di Sumbar</div>
+                                    <div class="news-list-date"><i class="bi bi-eye"></i> 6.3k · 1 Mar 2026</div>
+                                </div>
+                            </div>
+                            <div class="news-list-item">
+                                <img src="https://picsum.photos/seed/education-kids/150/72" class="news-list-img"
+                                    alt="">
+                                <div>
+                                    <div class="news-list-title">Kurikulum Lingkungan Hidup Masuk Pelajaran SD dan SMP
+                                    </div>
+                                    <div class="news-list-date"><i class="bi bi-eye"></i> 5.5k · 18 Feb 2026</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tips Ramah Lingkungan -->
+                        <div class="panel-card fade-in"
+                            style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9); box-shadow:none;">
+                            <div class="panel-title" style="color:var(--primary);">
+                                <div class="panel-title-icon"><i class="bi bi-lightbulb-fill"></i></div>
+                                Tips Hijau Hari Ini
+                            </div>
+                            <p style="font-size:13px; color:var(--text-dark); line-height:1.7; margin:0;">
+                                <strong style="color:var(--primary);">Tahukah kamu?</strong> Membawa tas belanja sendiri
+                                dapat mengurangi
+                                penggunaan kantong plastik hingga <strong>365 kantong per tahun</strong> per orang.
+                                Mulai dari hal kecil,
+                                ubah kebiasaan untuk bumi yang lebih sehat! 🌱
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

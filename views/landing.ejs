@@ -165,29 +165,56 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: white;
-            border: 1.5px solid #e5e7eb;
             border-radius: 30px;
             padding: 6px 14px;
             font-size: 12px;
             font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .hero-badge:hover,
-        .hero-badge.active {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: var(--primary-light);
+        .hero-badge.badge-green {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1.5px solid #C8E6C9;
+        }
+
+        .hero-badge.badge-green .dot {
+            background: #2E7D32;
+        }
+
+        .hero-badge.badge-blue {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 1.5px solid #BBDEFB;
+        }
+
+        .hero-badge.badge-blue .dot {
+            background: #1565C0;
+        }
+
+        .hero-badge.badge-purple {
+            background: #F3E8FF;
+            color: #7C3AED;
+            border: 1.5px solid #E9D5FF;
+        }
+
+        .hero-badge.badge-purple .dot {
+            background: #7C3AED;
+        }
+
+        .hero-badge.badge-orange {
+            background: #FFF3E0;
+            color: #E65100;
+            border: 1.5px solid #FFE0B2;
+        }
+
+        .hero-badge.badge-orange .dot {
+            background: #E65100;
         }
 
         .hero-badge .dot {
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: var(--primary);
         }
 
         .hero-title {
@@ -973,10 +1000,10 @@
 
                     <div class="col-lg-6">
                         <div class="hero-badges">
-                            <span class="hero-badge active"><span class="dot"></span>Plastik Keras</span>
-                            <span class="hero-badge"><span class="dot"></span>Kertas & Kardus</span>
-                            <span class="hero-badge"><span class="dot"></span>Elektronik</span>
-                            <span class="hero-badge"><span class="dot"></span>Logam</span>
+                            <span class="hero-badge badge-green"><span class="dot"></span>Plastik Keras</span>
+                            <span class="hero-badge badge-blue"><span class="dot"></span>Kertas & Kardus</span>
+                            <span class="hero-badge badge-purple"><span class="dot"></span>Elektronik</span>
+                            <span class="hero-badge badge-orange"><span class="dot"></span>Logam</span>
                         </div>
 
                         <h1 class="hero-title">

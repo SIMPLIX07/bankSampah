@@ -44,16 +44,16 @@
 
             <!-- Profile -->
             <div class="d-flex align-items-center gap-2">
-                <% if (typeof avatarUrl !== 'undefined' && avatarUrl) { %>
-                    <img src="<%= avatarUrl %>" class="avatar-circle"
-                        style="object-fit:cover;border:2px solid #e5e7eb;" alt="Profile">
-                <% } else { %>
-                    <div class="avatar-circle">M</div>
-                <% } %>
-                <div>
-                    <div class="fw-bold" style="font-size:13px;line-height:1.2;">Matt Shadows</div>
-                    <div class="text-muted" style="font-size:11px;">Joined 3 Months ago</div>
-                </div>
+                <% if (typeof avatarUrl !=='undefined' && avatarUrl) { %>
+                    <img src="<%= avatarUrl %>" class="avatar-circle" style="object-fit:cover;border:2px solid #e5e7eb;"
+                        alt="Profile">
+                    <% } else { %>
+                        <div class="avatar-circle">M</div>
+                        <% } %>
+                            <div>
+                                <div class="fw-bold" style="font-size:13px;line-height:1.2;">Matt Shadows</div>
+                                <div class="text-muted" style="font-size:11px;">Joined 3 Months ago</div>
+                            </div>
             </div>
 
         </div>

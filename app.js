@@ -1,8 +1,8 @@
 const express = require('express');
-const path    = require('path');
-const fs      = require('fs');
-const multer  = require('multer');
-const app     = express();
+const path = require('path');
+const fs = require('fs');
+const multer = require('multer');
+const app = express();
 
 const webRoutes = require('./routes/web');
 
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // ── MULTER: profile photo upload ──
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, path.join(__dirname, 'public/uploads/avatars')),
-    filename:    (req, file, cb) => {
+    filename: (req, file, cb) => {
         const ext = path.extname(file.originalname).toLowerCase();
         cb(null, 'profile' + ext);
     }

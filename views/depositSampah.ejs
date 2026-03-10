@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/layout.css">
+    <title>Deposit Sampah — Bank Sampah</title>
+
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-dark: #1B5E20;
+            --primary-light: #E8F5E9;
+            --primary-mid: #43A047;
+            --accent: #00BFA5;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --bg-light: #F3F7F3;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--bg-light);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 45%, #388E3C 75%, #00695C 100%);
+            border-radius: 28px;
+            padding: 32px 40px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            color: white;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 260px; height: 260px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -70px; right: 130px;
+            width: 180px; height: 180px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .page-header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 30px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .page-header-title {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+        .page-header-sub {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .header-deco {
+            position: absolute;
+            right: 40px; bottom: 0;
+            opacity: 0.18;
+        }
+
+        /* ── FORM CARD ── */
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 28px 32px;
+            margin-bottom: 20px;
+        }
+        .form-card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .form-card-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+        .section-step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px; height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 800;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        /* ── WASTE TYPE CHIPS ── */
+        .waste-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+        }
+        .waste-chip input[type="checkbox"] {
+            display: none;
+        }
+        .waste-chip label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 10px;
+            border: 2px solid #E5E7EB;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #FAFAFA;
+            text-align: center;
+            height: 100%;
+        }
+        .waste-chip label:hover {
+            border-color: var(--primary-mid);
+            background: var(--primary-light);
+        }
+        .waste-chip input[type="checkbox"]:checked + label {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
+        }
+        .waste-chip-icon {
+            width: 44px; height: 44px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+            transition: all 0.2s;
+        }
+        .waste-chip input:checked + label .waste-chip-icon {
+            transform: scale(1.1);
+        }
+        .waste-chip-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+        .waste-chip-pts {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--primary-light);
+            border-radius: 20px;
+            padding: 2px 8px;
+        }
+
+        /* ── WEIGHT SLIDER ── */
+        .weight-display {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .weight-big {
+            font-size: 52px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .weight-unit {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding-bottom: 8px;
+        }
+        .weight-est {
+            margin-left: auto;
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 8px 14px;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+        .weight-est-val {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .weight-est-lbl {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        input[type="range"].eco-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--primary) 0%, var(--primary) 30%, #E5E7EB 30%);
+            outline: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        input[type="range"].eco-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(46,125,50,0.35);
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        input[type="range"].eco-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .quick-kg {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .quick-kg-btn {
+            padding: 5px 14px;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            background: white;
+            color: var(--text-dark);
+            transition: all 0.2s;
+        }
+        .quick-kg-btn:hover,
+        .quick-kg-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* ── METHOD CARDS ── */
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .method-card input[type="radio"] { display: none; }
+        .method-card label {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border: 2px solid #E5E7EB;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #FAFAFA;
+        }
+        .method-card label:hover {
+            border-color: var(--primary-mid);
+            background: var(--primary-light);
+        }
+        .method-card input[type="radio"]:checked + label {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
+        }
+        .method-icon {
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+        }
+        .method-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+        .method-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .method-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 20px;
+            padding: 3px 10px;
+            align-self: flex-start;
+        }
+
+        /* ── FORM FIELDS ── */
+        .eco-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .eco-label i {
+            color: var(--primary);
+            font-size: 14px;
+        }
+        .eco-input {
+            width: 100%;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: #FAFAFA;
+            transition: border 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        .eco-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
+            background: white;
+        }
+        select.eco-input {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+        textarea.eco-input {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* ── LOCATION BANK LIST ── */
+        .bank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .bank-option input[type="radio"] { display: none; }
+        .bank-option label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #FAFAFA;
+        }
+        .bank-option label:hover {
+            border-color: var(--primary-mid);
+            background: var(--primary-light);
+        }
+        .bank-option input:checked + label {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
+        }
+        .bank-dot {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            border: 2px solid #D1D5DB;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .bank-option input:checked + label .bank-dot {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+        .bank-option input:checked + label .bank-dot::after {
+            content: '';
+            width: 6px; height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+        .bank-icon {
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .bank-name { font-size: 13px; font-weight: 700; }
+        .bank-address { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+        .bank-km {
+            margin-left: auto;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--primary-light);
+            border-radius: 20px;
+            padding: 3px 10px;
+            flex-shrink: 0;
+        }
+
+        /* ── SUMMARY BOX ── */
+        .summary-box {
+            background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1.5px solid #C8E6C9;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 13px;
+            border-bottom: 1px dashed #C8E6C9;
+        }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-key {
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .summary-key i { color: var(--primary); }
+        .summary-val {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            margin-top: 4px;
+        }
+        .summary-total-key {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .summary-pts {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .summary-pts-lbl {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ── SUBMIT BTN ── */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #2E7D32, #43A047);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 4px 16px rgba(46,125,50,0.3);
+        }
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46,125,50,0.4);
+        }
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        .btn-cancel {
+            width: 100%;
+            background: white;
+            color: var(--text-muted);
+            border: 1.5px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .btn-cancel:hover {
+            border-color: #9CA3AF;
+            color: var(--text-dark);
+        }
+
+        /* ── SIDE INFO ── */
+        .info-box {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 22px 24px;
+            margin-bottom: 16px;
+        }
+        .info-box-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-box-title i { color: var(--primary); font-size: 16px; }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 0;
+            border-bottom: 1px solid #F3F4F6;
+        }
+        .price-row:last-child { border-bottom: none; }
+        .price-type { display: flex; align-items: center; gap: 8px; }
+        .price-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .price-name { font-size: 12px; font-weight: 600; color: var(--text-dark); }
+        .price-per { font-size: 11px; color: var(--text-muted); }
+        .price-val {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #FFF8E1, #FFF3CD);
+            border-radius: 18px;
+            border: 1.5px solid #FFE082;
+            padding: 16px 18px;
+        }
+        .tip-card-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #E65100;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            color: #5D4037;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .tip-item:last-child { margin-bottom: 0; }
+        .tip-item::before {
+            content: '✓';
+            color: #2E7D32;
+            font-weight: 800;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeUp 0.45s ease forwards; }
+        .fade-in:nth-child(2) { animation-delay: 0.07s; }
+        .fade-in:nth-child(3) { animation-delay: 0.14s; }
+
+        /* ── LOCATION PICKUP FIELDS (hidden by default) ── */
+        #pickup-fields { display: none; }
+        #dropoff-fields { display: block; }
+    </style>
+</head>
+
+<body>
+    <%- include('./components/navbar', { activePage: 'deposit' }) %>
+    <%- include('./components/sidebar', { activePage: 'dashboard' }) %>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- ── PAGE HEADER ── -->
+        <div class="page-header fade-in">
+            <div class="page-header-badge">
+                <i class="bi bi-recycle"></i> Deposit Sampah
+            </div>
+            <div class="page-header-title">Setor Sampahmu, Raih Poinnya! ♻️</div>
+            <div class="page-header-sub">Pilih jenis & berat sampah, tentukan metode pengiriman, lalu jadwalkan setoran Anda.</div>
+            <!-- Deco SVG -->
+            <div class="header-deco">
+                <svg viewBox="0 0 120 160" width="130" height="150">
+                    <rect x="50" y="110" width="20" height="44" rx="6" fill="white"/>
+                    <ellipse cx="60" cy="108" rx="38" ry="28" fill="white"/>
+                    <ellipse cx="60" cy="80" rx="30" ry="24" fill="white"/>
+                    <ellipse cx="60" cy="56" rx="22" ry="20" fill="white"/>
+                    <ellipse cx="60" cy="36" rx="15" ry="16" fill="white"/>
+                </svg>
+            </div>
+        </div>
+
+        <form id="depositForm" action="/deposit" method="POST" novalidate>
+            <div class="row g-4">
+
+                <!-- ── LEFT: FORM ── -->
+                <div class="col-lg-8">
+
+                    <!-- STEP 1: Jenis Sampah -->
+                    <div class="form-card fade-in">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="section-step">1</span>
+                            <div class="form-card-title">Jenis Sampah</div>
+                        </div>
+                        <div class="form-card-sub">Pilih satu atau lebih jenis sampah yang ingin kamu setorkan</div>
+
+                        <div class="waste-grid">
+                            <!-- Plastik -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-plastik" name="jenis_sampah[]" value="plastik">
+                                <label for="waste-plastik">
+                                    <div class="waste-chip-icon" style="background:#E3F2FD;color:#1565C0;">🥤</div>
+                                    <div class="waste-chip-name">Plastik</div>
+                                    <div class="waste-chip-pts">Rp 3.000/kg</div>
+                                </label>
+                            </div>
+                            <!-- Kertas -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-kertas" name="jenis_sampah[]" value="kertas">
+                                <label for="waste-kertas">
+                                    <div class="waste-chip-icon" style="background:#FFF8E1;color:#F57F17;">📦</div>
+                                    <div class="waste-chip-name">Kertas & Kardus</div>
+                                    <div class="waste-chip-pts">Rp 1.500/kg</div>
+                                </label>
+                            </div>
+                            <!-- Kaca -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-kaca" name="jenis_sampah[]" value="kaca">
+                                <label for="waste-kaca">
+                                    <div class="waste-chip-icon" style="background:#E8F5E9;color:#2E7D32;">🍶</div>
+                                    <div class="waste-chip-name">Kaca & Botol</div>
+                                    <div class="waste-chip-pts">Rp 500/kg</div>
+                                </label>
+                            </div>
+                            <!-- Logam -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-logam" name="jenis_sampah[]" value="logam">
+                                <label for="waste-logam">
+                                    <div class="waste-chip-icon" style="background:#F3E8FF;color:#7C3AED;">🔧</div>
+                                    <div class="waste-chip-name">Logam & Besi</div>
+                                    <div class="waste-chip-pts">Rp 5.000/kg</div>
+                                </label>
+                            </div>
+                            <!-- Organik -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-organik" name="jenis_sampah[]" value="organik">
+                                <label for="waste-organik">
+                                    <div class="waste-chip-icon" style="background:#F1F8E9;color:#558B2F;">🌿</div>
+                                    <div class="waste-chip-name">Organik</div>
+                                    <div class="waste-chip-pts">Rp 200/kg</div>
+                                </label>
+                            </div>
+                            <!-- Elektronik -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-elektronik" name="jenis_sampah[]" value="elektronik">
+                                <label for="waste-elektronik">
+                                    <div class="waste-chip-icon" style="background:#FBE9E7;color:#BF360C;">💻</div>
+                                    <div class="waste-chip-name">Elektronik</div>
+                                    <div class="waste-chip-pts">Rp 8.000/kg</div>
+                                </label>
+                            </div>
+                            <!-- Tekstil -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-tekstil" name="jenis_sampah[]" value="tekstil">
+                                <label for="waste-tekstil">
+                                    <div class="waste-chip-icon" style="background:#FCE4EC;color:#AD1457;">👕</div>
+                                    <div class="waste-chip-name">Tekstil</div>
+                                    <div class="waste-chip-pts">Rp 1.000/kg</div>
+                                </label>
+                            </div>
+                            <!-- Minyak -->
+                            <div class="waste-chip">
+                                <input type="checkbox" id="waste-minyak" name="jenis_sampah[]" value="minyak">
+                                <label for="waste-minyak">
+                                    <div class="waste-chip-icon" style="background:#FFFDE7;color:#F9A825;">🛢️</div>
+                                    <div class="waste-chip-name">Minyak Jelantah</div>
+                                    <div class="waste-chip-pts">Rp 4.000/L</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Estimasi Berat -->
+                    <div class="form-card fade-in">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="section-step">2</span>
+                            <div class="form-card-title">Estimasi Berat</div>
+                        </div>
+                        <div class="form-card-sub">Geser slider atau ketik langsung berat sampah yang akan disetor</div>
+
+                        <div class="weight-display">
+                            <div class="weight-big" id="weightDisplay">5</div>
+                            <div class="weight-unit">kg</div>
+                            <div class="weight-est">
+                                <div class="weight-est-val" id="pointsEstimate">+25 Pts</div>
+                                <div class="weight-est-lbl">Estimasi Poin</div>
+                            </div>
+                        </div>
+
+                        <input type="range" class="eco-slider" id="weightSlider" name="berat_kg"
+                            min="1" max="100" value="5" step="1">
+                        <div class="slider-labels">
+                            <span>1 kg</span>
+                            <span>25 kg</span>
+                            <span>50 kg</span>
+                            <span>75 kg</span>
+                            <span>100 kg</span>
+                        </div>
+
+                        <div class="quick-kg mt-3">
+                            <span class="quick-kg-btn" data-val="1">1 kg</span>
+                            <span class="quick-kg-btn" data-val="2">2 kg</span>
+                            <span class="quick-kg-btn" data-val="5" >5 kg</span>
+                            <span class="quick-kg-btn" data-val="10">10 kg</span>
+                            <span class="quick-kg-btn" data-val="20">20 kg</span>
+                            <span class="quick-kg-btn" data-val="50">50 kg</span>
+                        </div>
+
+                        <!-- Manual input -->
+                        <div class="mt-3">
+                            <label class="eco-label"><i class="bi bi-pencil"></i> Input Manual (kg)</label>
+                            <input type="number" class="eco-input" id="weightManual"
+                                placeholder="Masukkan berat manual..." min="1" max="10000" step="0.5">
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Metode Pengiriman -->
+                    <div class="form-card fade-in">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="section-step">3</span>
+                            <div class="form-card-title">Metode Pengiriman</div>
+                        </div>
+                        <div class="form-card-sub">Pilih cara kamu ingin mengirimkan sampah</div>
+
+                        <div class="method-grid">
+                            <div class="method-card">
+                                <input type="radio" id="method-dropoff" name="metode" value="dropoff" checked>
+                                <label for="method-dropoff">
+                                    <div class="method-icon" style="background:#E8F5E9;color:#2E7D32;">
+                                        <i class="bi bi-building-fill-check"></i>
+                                    </div>
+                                    <div>
+                                        <div class="method-name">Antar Sendiri</div>
+                                        <div class="method-desc">Bawa sampah langsung ke bank sampah terdekat. Gratis & cepat!</div>
+                                    </div>
+                                    <span class="method-badge" style="background:#E8F5E9;color:#2E7D32;">
+                                        <i class="bi bi-check-circle-fill"></i> Gratis
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="method-card">
+                                <input type="radio" id="method-pickup" name="metode" value="pickup">
+                                <label for="method-pickup">
+                                    <div class="method-icon" style="background:#E3F2FD;color:#1565C0;">
+                                        <i class="bi bi-truck"></i>
+                                    </div>
+                                    <div>
+                                        <div class="method-name">Jemput di Tempat</div>
+                                        <div class="method-desc">Kurir kami akan menjemput sampah ke alamat Anda sesuai jadwal.</div>
+                                    </div>
+                                    <span class="method-badge" style="background:#E3F2FD;color:#1565C0;">
+                                        <i class="bi bi-geo-alt-fill"></i> Min. 5 kg
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Drop-off: Pilih Bank Sampah -->
+                        <div id="dropoff-fields" class="mt-4">
+                            <label class="eco-label"><i class="bi bi-geo-alt-fill"></i> Pilih Bank Sampah Terdekat</label>
+                            <div class="bank-list">
+                                <div class="bank-option">
+                                    <input type="radio" id="bank-1" name="bank_sampah" value="bank-pusat">
+                                    <label for="bank-1">
+                                        <div class="bank-dot"></div>
+                                        <div class="bank-icon"><i class="bi bi-building"></i></div>
+                                        <div>
+                                            <div class="bank-name">Bank Sampah Pusat</div>
+                                            <div class="bank-address">Jl. Merdeka No.10, Bandung Tengah</div>
+                                        </div>
+                                        <span class="bank-km">0.8 km</span>
+                                    </label>
+                                </div>
+                                <div class="bank-option">
+                                    <input type="radio" id="bank-2" name="bank_sampah" value="bank-utara">
+                                    <label for="bank-2">
+                                        <div class="bank-dot"></div>
+                                        <div class="bank-icon"><i class="bi bi-building"></i></div>
+                                        <div>
+                                            <div class="bank-name">Bank Sampah Bandung Utara</div>
+                                            <div class="bank-address">Jl. Cihampelas No.45, Bandung Utara</div>
+                                        </div>
+                                        <span class="bank-km">2.1 km</span>
+                                    </label>
+                                </div>
+                                <div class="bank-option">
+                                    <input type="radio" id="bank-3" name="bank_sampah" value="bank-selatan">
+                                    <label for="bank-3">
+                                        <div class="bank-dot"></div>
+                                        <div class="bank-icon"><i class="bi bi-building"></i></div>
+                                        <div>
+                                            <div class="bank-name">Bank Sampah Rancasari</div>
+                                            <div class="bank-address">Jl. Rancasari Blok C No.7, Bandung Selatan</div>
+                                        </div>
+                                        <span class="bank-km">3.4 km</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pickup: Alamat Jemput -->
+                        <div id="pickup-fields" class="mt-4">
+                            <div class="mb-3">
+                                <label class="eco-label"><i class="bi bi-house-fill"></i> Alamat Penjemputan</label>
+                                <input type="text" class="eco-input" name="alamat_jemput"
+                                    placeholder="Jl. Contoh No.1, Kec. Contoh, Bandung...">
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label class="eco-label"><i class="bi bi-map-fill"></i> Kecamatan</label>
+                                    <select class="eco-input" name="kecamatan">
+                                        <option value="">Pilih Kecamatan...</option>
+                                        <option>Bandung Wetan</option>
+                                        <option>Bandung Kulon</option>
+                                        <option>Cicendo</option>
+                                        <option>Coblong</option>
+                                        <option>Cibeunying Kaler</option>
+                                        <option>Rancasari</option>
+                                        <option>Buahbatu</option>
+                                        <option>Antapani</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="eco-label"><i class="bi bi-telephone-fill"></i> Nomor Telepon</label>
+                                    <input type="tel" class="eco-input" name="no_telepon"
+                                        placeholder="08xx-xxxx-xxxx">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Jadwal & Catatan -->
+                    <div class="form-card fade-in">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="section-step">4</span>
+                            <div class="form-card-title">Jadwal & Catatan</div>
+                        </div>
+                        <div class="form-card-sub">Tentukan kapan sampah akan disetor dan tambahkan catatan bila perlu</div>
+
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label class="eco-label"><i class="bi bi-calendar3"></i> Tanggal Setoran</label>
+                                <input type="date" class="eco-input" name="tanggal" id="tanggalInput">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="eco-label"><i class="bi bi-clock-fill"></i> Jam</label>
+                                <select class="eco-input" name="jam">
+                                    <option value="">Pilih Jam...</option>
+                                    <option>08:00 – 10:00</option>
+                                    <option>10:00 – 12:00</option>
+                                    <option>13:00 – 15:00</option>
+                                    <option>15:00 – 17:00</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="eco-label"><i class="bi bi-chat-left-text-fill"></i> Catatan Tambahan <span style="font-weight:400;color:var(--text-muted);font-size:11px;">(opsional)</span></label>
+                            <textarea class="eco-input" name="catatan"
+                                placeholder="Contoh: Sampah sudah dipilah, ada botol kaca ekstra, tolong bawa kantong..."></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ── RIGHT: SUMMARY & INFO ── -->
+                <div class="col-lg-4">
+
+                    <!-- Harga per Jenis -->
+                    <div class="info-box fade-in">
+                        <div class="info-box-title"><i class="bi bi-tags-fill"></i> Harga per Jenis Sampah</div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#1565C0;"></div>
+                                <div>
+                                    <div class="price-name">Plastik</div>
+                                    <div class="price-per">per kg</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 3.000 / 5 Pts</div>
+                        </div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#F57F17;"></div>
+                                <div>
+                                    <div class="price-name">Kertas & Kardus</div>
+                                    <div class="price-per">per kg</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 1.500 / 3 Pts</div>
+                        </div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#2E7D32;"></div>
+                                <div>
+                                    <div class="price-name">Kaca & Botol</div>
+                                    <div class="price-per">per kg</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 500 / 1 Pts</div>
+                        </div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#7C3AED;"></div>
+                                <div>
+                                    <div class="price-name">Logam & Besi</div>
+                                    <div class="price-per">per kg</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 5.000 / 8 Pts</div>
+                        </div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#558B2F;"></div>
+                                <div>
+                                    <div class="price-name">Organik</div>
+                                    <div class="price-per">per kg</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 200 / 1 Pts</div>
+                        </div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#BF360C;"></div>
+                                <div>
+                                    <div class="price-name">Elektronik</div>
+                                    <div class="price-per">per kg</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 8.000 / 10 Pts</div>
+                        </div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#AD1457;"></div>
+                                <div>
+                                    <div class="price-name">Tekstil</div>
+                                    <div class="price-per">per kg</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 1.000 / 2 Pts</div>
+                        </div>
+                        <div class="price-row">
+                            <div class="price-type">
+                                <div class="price-dot" style="background:#F9A825;"></div>
+                                <div>
+                                    <div class="price-name">Minyak Jelantah</div>
+                                    <div class="price-per">per liter</div>
+                                </div>
+                            </div>
+                            <div class="price-val">Rp 4.000 / 6 Pts</div>
+                        </div>
+                    </div>
+
+                    <!-- Ringkasan -->
+                    <div class="info-box fade-in">
+                        <div class="info-box-title"><i class="bi bi-receipt-cutoff"></i> Ringkasan Setoran</div>
+                        <div class="summary-box">
+                            <div class="summary-row">
+                                <span class="summary-key"><i class="bi bi-tag-fill"></i> Jenis Sampah</span>
+                                <span class="summary-val" id="sumJenis">—</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-key"><i class="bi bi-speedometer2"></i> Estimasi Berat</span>
+                                <span class="summary-val" id="sumBerat">5 kg</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-key"><i class="bi bi-truck"></i> Metode</span>
+                                <span class="summary-val" id="sumMetode">Antar Sendiri</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-key"><i class="bi bi-calendar3"></i> Jadwal</span>
+                                <span class="summary-val" id="sumJadwal">—</span>
+                            </div>
+                            <div class="summary-total">
+                                <div>
+                                    <div class="summary-total-key">Estimasi Pendapatan</div>
+                                    <div class="summary-pts-lbl">tergantung jenis & berat aktual</div>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div class="summary-pts" id="sumPts">+25</div>
+                                    <div class="summary-pts-lbl">Poin</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit mt-4">
+                            <i class="bi bi-send-fill"></i> Kirim Permintaan Setoran
+                        </button>
+                        <a href="/dashboard" class="btn-cancel">
+                            <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
+                        </a>
+                    </div>
+
+                    <!-- Tips -->
+                    <div class="tip-card fade-in">
+                        <div class="tip-card-title"><i class="bi bi-lightbulb-fill"></i> Tips Setoran</div>
+                        <div class="tip-item">Pisahkan sampah sebelum disetor agar dinilai lebih akurat.</div>
+                        <div class="tip-item">Bersihkan botol & kaleng dari sisa cairan.</div>
+                        <div class="tip-item">Elektronik diserahkan langsung, tidak bisa dijemput.</div>
+                        <div class="tip-item">Poin dikreditkan setelah sampah ditimbang di bank sampah.</div>
+                        <div class="tip-item">Jemput di tempat min. 5 kg dan dalam radius 10 km.</div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div><!-- /main-content -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ── WEIGHT SLIDER ──
+        const slider    = document.getElementById('weightSlider');
+        const weightDsp = document.getElementById('weightDisplay');
+        const ptsEst    = document.getElementById('pointsEstimate');
+        const weightMan = document.getElementById('weightManual');
+        const sumBerat  = document.getElementById('sumBerat');
+        const sumPts    = document.getElementById('sumPts');
+
+        function updateWeight(val) {
+            val = Math.max(1, Math.min(10000, parseFloat(val) || 1));
+            slider.value  = Math.min(val, 100);
+            weightDsp.textContent = val;
+            const pts = Math.round(val * 5);
+            ptsEst.textContent  = '+' + pts + ' Pts';
+            sumBerat.textContent = val + ' kg';
+            sumPts.textContent   = '+' + pts;
+            // Update slider gradient
+            const pct = (Math.min(val, 100) / 100) * 100;
+            slider.style.background =
+                `linear-gradient(to right, var(--primary) 0%, var(--primary) ${pct}%, #E5E7EB ${pct}%)`;
+        }
+
+        slider.addEventListener('input', () => {
+            weightMan.value = slider.value;
+            updateWeight(slider.value);
+        });
+
+        weightMan.addEventListener('input', () => updateWeight(weightMan.value));
+
+        // Quick kg buttons
+        document.querySelectorAll('.quick-kg-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.quick-kg-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const v = parseInt(btn.dataset.val);
+                weightMan.value = v;
+                updateWeight(v);
+            });
+        });
+
+        // Set default quick button
+        document.querySelector('.quick-kg-btn[data-val="5"]').classList.add('active');
+        updateWeight(5);
+
+        // ── DELIVERY METHOD TOGGLE ──
+        const pickupFields  = document.getElementById('pickup-fields');
+        const dropoffFields = document.getElementById('dropoff-fields');
+
+        document.querySelectorAll('input[name="metode"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'pickup') {
+                    pickupFields.style.display  = 'block';
+                    dropoffFields.style.display = 'none';
+                    document.getElementById('sumMetode').textContent = 'Jemput di Tempat';
+                } else {
+                    pickupFields.style.display  = 'none';
+                    dropoffFields.style.display = 'block';
+                    document.getElementById('sumMetode').textContent = 'Antar Sendiri';
+                }
+            });
+        });
+
+        // ── JENIS SAMPAH SUMMARY ──
+        const namaJenis = {
+            plastik: 'Plastik', kertas: 'Kertas', kaca: 'Kaca',
+            logam: 'Logam', organik: 'Organik', elektronik: 'Elektronik',
+            tekstil: 'Tekstil', minyak: 'Minyak Jelantah'
+        };
+        document.querySelectorAll('input[name="jenis_sampah[]"]').forEach(cb => {
+            cb.addEventListener('change', () => {
+                const checked = [...document.querySelectorAll('input[name="jenis_sampah[]"]:checked')]
+                    .map(c => namaJenis[c.value]);
+                document.getElementById('sumJenis').textContent =
+                    checked.length ? checked.join(', ') : '—';
+            });
+        });
+
+        // ── JADWAL SUMMARY ──
+        const tanggalInput = document.getElementById('tanggalInput');
+        // Set min date = today
+        tanggalInput.min = new Date().toISOString().split('T')[0];
+        tanggalInput.addEventListener('change', updateJadwal);
+        document.querySelector('select[name="jam"]').addEventListener('change', updateJadwal);
+
+        function updateJadwal() {
+            const tgl = tanggalInput.value;
+            const jam = document.querySelector('select[name="jam"]').value;
+            if (tgl && jam) {
+                const d = new Date(tgl);
+                const opts = { day: 'numeric', month: 'short', year: 'numeric' };
+                document.getElementById('sumJadwal').textContent =
+                    d.toLocaleDateString('id-ID', opts) + ', ' + jam;
+            } else if (tgl) {
+                const d = new Date(tgl);
+                document.getElementById('sumJadwal').textContent =
+                    d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+            } else {
+                document.getElementById('sumJadwal').textContent = '—';
+            }
+        }
+    </script>
+</body>
+
+</html>

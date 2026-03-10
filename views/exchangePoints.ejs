@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/layout.css">
+    <title>Tukar Poin — Bank Sampah</title>
+
+    <style>
+        :root {
+            --primary: #1565C0;
+            --primary-dark: #0D47A1;
+            --primary-light: #E3F2FD;
+            --primary-mid: #1976D2;
+            --green: #2E7D32;
+            --green-light: #E8F5E9;
+            --accent: #00BFA5;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --bg-light: #F3F7F3;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--bg-light);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: linear-gradient(135deg, #0D47A1 0%, #1565C0 40%, #1976D2 70%, #00838F 100%);
+            border-radius: 28px;
+            padding: 32px 40px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            color: white;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 260px; height: 260px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -70px; right: 130px;
+            width: 180px; height: 180px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .page-header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 30px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .page-header-title {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+        .page-header-sub {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 22px;
+        }
+        .header-balance {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+        .header-balance-icon {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .header-balance-val {
+            font-size: 22px;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .header-balance-lbl {
+            font-size: 11px;
+            opacity: 0.75;
+            font-weight: 500;
+        }
+        .header-deco {
+            position: absolute;
+            right: 42px; top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.15;
+            font-size: 110px;
+        }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+        .section-step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px; height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 800;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        /* ── FORM CARD ── */
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 28px 32px;
+            margin-bottom: 20px;
+        }
+        .form-card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .form-card-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+        }
+
+        /* ── REWARD CATALOGUE ── */
+        .reward-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .filter-btn {
+            padding: 6px 16px;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            background: white;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .reward-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .reward-card {
+            border: 1.5px solid #E5E7EB;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #FAFAFA;
+            transition: all 0.25s;
+            cursor: pointer;
+            position: relative;
+        }
+        .reward-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(21,101,192,0.12);
+            transform: translateY(-3px);
+        }
+        .reward-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(21,101,192,0.15);
+        }
+        .reward-card-img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+        }
+        .reward-card-body {
+            padding: 14px;
+        }
+        .reward-cat {
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 20px;
+            padding: 2px 8px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .reward-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        .reward-pts-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .reward-pts {
+            font-size: 15px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .reward-pts-lbl {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .reward-check {
+            position: absolute;
+            top: 10px; right: 10px;
+            width: 26px; height: 26px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+        }
+        .reward-card.selected .reward-check {
+            display: flex;
+        }
+        .reward-stock {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* ── CUSTOM REDEEM ── */
+        .tab-toggle {
+            display: flex;
+            background: #F3F4F6;
+            border-radius: 14px;
+            padding: 4px;
+            gap: 4px;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+        .tab-btn {
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* ── ECO LABEL / INPUT ── */
+        .eco-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .eco-label i { color: var(--primary); font-size: 14px; }
+        .eco-input {
+            width: 100%;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: #FAFAFA;
+            transition: border 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        .eco-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(21,101,192,0.1);
+            background: white;
+        }
+        select.eco-input {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+        textarea.eco-input {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* ── POINTS INPUT ── */
+        .pts-input-wrap {
+            position: relative;
+        }
+        .pts-suffix {
+            position: absolute;
+            right: 16px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            pointer-events: none;
+        }
+        .pts-input-wrap .eco-input {
+            padding-right: 60px;
+        }
+        .pts-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .pts-preset-btn {
+            padding: 5px 14px;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            background: white;
+            color: var(--text-dark);
+            transition: all 0.2s;
+        }
+        .pts-preset-btn:hover,
+        .pts-preset-btn.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* ── CONVERSION DISPLAY ── */
+        .conversion-box {
+            background: linear-gradient(135deg, #E3F2FD, #EDE7F6);
+            border-radius: 18px;
+            padding: 18px 22px;
+            margin-top: 16px;
+            border: 1.5px solid #BBDEFB;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .conv-side {
+            text-align: center;
+            flex: 1;
+        }
+        .conv-val {
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .conv-lbl {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .conv-arrow {
+            font-size: 28px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        /* ── SUMMARY BOX ── */
+        .summary-box {
+            background: linear-gradient(135deg, #E3F2FD, #EDE7F6);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1.5px solid #BBDEFB;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 13px;
+            border-bottom: 1px dashed #BBDEFB;
+        }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-key {
+            color: var(--text-muted);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .summary-key i { color: var(--primary); }
+        .summary-val { font-weight: 700; color: var(--text-dark); }
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+        }
+        .summary-total-key { font-size: 14px; font-weight: 700; }
+        .summary-pts { font-size: 26px; font-weight: 900; color: var(--primary); }
+        .summary-pts-lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+
+        /* ── SUBMIT BUTTONS ── */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #1565C0, #1976D2);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 16px rgba(21,101,192,0.3);
+        }
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #0D47A1, #1565C0);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(21,101,192,0.4);
+        }
+        .btn-cancel {
+            width: 100%;
+            background: white;
+            color: var(--text-muted);
+            border: 1.5px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .btn-cancel:hover {
+            border-color: #9CA3AF;
+            color: var(--text-dark);
+        }
+
+        /* ── SIDE INFO ── */
+        .info-box {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 22px 24px;
+            margin-bottom: 16px;
+        }
+        .info-box-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-box-title i { color: var(--primary); font-size: 16px; }
+
+        /* ── HISTORY LIST ── */
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #F3F4F6;
+        }
+        .history-item:last-child { border-bottom: none; }
+        .history-icon {
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+        .history-name { font-size: 13px; font-weight: 700; }
+        .history-date { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+        .history-pts { font-size: 13px; font-weight: 800; white-space: nowrap; }
+
+        /* ── TIP BOX ── */
+        .tip-card {
+            background: linear-gradient(135deg, #E8EAF6, #EDE7F6);
+            border-radius: 18px;
+            border: 1.5px solid #C5CAE9;
+            padding: 16px 18px;
+        }
+        .tip-card-title {
+            font-size: 12px; font-weight: 800; color: #283593;
+            margin-bottom: 10px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            color: #303F9F;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .tip-item:last-child { margin-bottom: 0; }
+        .tip-item::before {
+            content: '★';
+            color: var(--primary);
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeUp 0.45s ease forwards; }
+        .fade-in:nth-child(2) { animation-delay: 0.07s; }
+        .fade-in:nth-child(3) { animation-delay: 0.14s; }
+
+        /* Tab panels */
+        #panel-katalog { display: block; }
+        #panel-custom  { display: none; }
+    </style>
+</head>
+
+<body>
+    <%- include('./components/navbar', { activePage: 'exchange' }) %>
+    <%- include('./components/sidebar', { activePage: 'dashboard' }) %>
+
+    <div class="main-content">
+
+        <!-- ── PAGE HEADER ── -->
+        <div class="page-header fade-in">
+            <div class="page-header-badge">
+                <i class="bi bi-arrow-left-right"></i> Exchange Points
+            </div>
+            <div class="page-header-title">Tukarkan Poinmu Jadi Hadiah! 🎁</div>
+            <div class="page-header-sub">Pilih reward dari katalog atau tukar langsung ke saldo uang.</div>
+            <div class="header-balance">
+                <div class="header-balance-icon"><i class="bi bi-star-fill"></i></div>
+                <div>
+                    <div class="header-balance-val">200 Pts</div>
+                    <div class="header-balance-lbl">Poin Tersedia</div>
+                </div>
+            </div>
+            <div class="header-deco">⭐</div>
+        </div>
+
+        <form id="exchangeForm" action="/exchange" method="POST" novalidate>
+            <div class="row g-4">
+
+                <!-- ── LEFT ── -->
+                <div class="col-lg-8">
+
+                    <!-- STEP 1: Metode Penukaran -->
+                    <div class="form-card fade-in">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="section-step">1</span>
+                            <div class="form-card-title">Metode Penukaran</div>
+                        </div>
+                        <div class="form-card-sub">Pilih cara kamu ingin menggunakan poin</div>
+
+                        <div class="tab-toggle">
+                            <button type="button" class="tab-btn active" id="tab-katalog" onclick="switchTab('katalog')">
+                                🎁 Katalog Hadiah
+                            </button>
+                            <button type="button" class="tab-btn" id="tab-custom" onclick="switchTab('custom')">
+                                💵 Konversi ke Uang
+                            </button>
+                        </div>
+
+                        <!-- Panel: Katalog -->
+                        <div id="panel-katalog">
+                            <div class="reward-filter">
+                                <button type="button" class="filter-btn active" onclick="filterReward(this, 'all')">Semua</button>
+                                <button type="button" class="filter-btn" onclick="filterReward(this, 'belanja')">🛒 Belanja</button>
+                                <button type="button" class="filter-btn" onclick="filterReward(this, 'makanan')">🍔 Makanan</button>
+                                <button type="button" class="filter-btn" onclick="filterReward(this, 'transportasi')">🚌 Transportasi</button>
+                                <button type="button" class="filter-btn" onclick="filterReward(this, 'hiburan')">🎮 Hiburan</button>
+                                <button type="button" class="filter-btn" onclick="filterReward(this, 'donasi')">💚 Donasi</button>
+                            </div>
+
+                            <div class="reward-grid" id="rewardGrid">
+
+                                <!-- Belanja -->
+                                <div class="reward-card" data-cat="belanja" data-pts="50" data-name="Voucher Alfamart Rp 15.000" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#FFF8E1;">🛒</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#FFF8E1;color:#F57F17;">Belanja</span>
+                                        <div class="reward-name">Voucher Alfamart Rp 15.000</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">50 Pts</div>
+                                                <div class="reward-stock">Stok: 42</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="reward-card" data-cat="belanja" data-pts="80" data-name="Voucher Indomaret Rp 25.000" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#E8F5E9;">🏪</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#FFF8E1;color:#F57F17;">Belanja</span>
+                                        <div class="reward-name">Voucher Indomaret Rp 25.000</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">80 Pts</div>
+                                                <div class="reward-stock">Stok: 18</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Makanan -->
+                                <div class="reward-card" data-cat="makanan" data-pts="60" data-name="Voucher GrabFood Rp 20.000" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#FCE4EC;">🍔</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#FCE4EC;color:#AD1457;">Makanan</span>
+                                        <div class="reward-name">Voucher GrabFood Rp 20.000</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">60 Pts</div>
+                                                <div class="reward-stock">Stok: 30</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="reward-card" data-cat="makanan" data-pts="45" data-name="Kupon Makan Siang" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#FFF3E0;">🍱</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#FCE4EC;color:#AD1457;">Makanan</span>
+                                        <div class="reward-name">Kupon Makan Siang</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">45 Pts</div>
+                                                <div class="reward-stock">Stok: 15</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Transportasi -->
+                                <div class="reward-card" data-cat="transportasi" data-pts="40" data-name="Top-up GoPay Rp 10.000" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#E8F5E9;">🚌</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#E3F2FD;color:#1565C0;">Transport</span>
+                                        <div class="reward-name">Top-up GoPay Rp 10.000</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">40 Pts</div>
+                                                <div class="reward-stock">Stok: 50</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="reward-card" data-cat="transportasi" data-pts="70" data-name="Saldo e-Money KRL" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#E3F2FD;">🚆</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#E3F2FD;color:#1565C0;">Transport</span>
+                                        <div class="reward-name">Saldo e-Money KRL</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">70 Pts</div>
+                                                <div class="reward-stock">Stok: 25</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Hiburan -->
+                                <div class="reward-card" data-cat="hiburan" data-pts="100" data-name="Voucher Netflix 1 Bulan" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#F3E8FF;">🎬</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#F3E8FF;color:#7C3AED;">Hiburan</span>
+                                        <div class="reward-name">Voucher Netflix 1 Bulan</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">100 Pts</div>
+                                                <div class="reward-stock">Stok: 10</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="reward-card" data-cat="hiburan" data-pts="55" data-name="Voucher Spotify 1 Bulan" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#E8F5E9;">🎵</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#F3E8FF;color:#7C3AED;">Hiburan</span>
+                                        <div class="reward-name">Voucher Spotify 1 Bulan</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">55 Pts</div>
+                                                <div class="reward-stock">Stok: 20</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Donasi -->
+                                <div class="reward-card" data-cat="donasi" data-pts="30" data-name="Donasi Tanam Pohon" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#E8F5E9;">🌱</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#E8F5E9;color:#2E7D32;">Donasi</span>
+                                        <div class="reward-name">Donasi Tanam Pohon</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">30 Pts</div>
+                                                <div class="reward-stock">Tanpa batas</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="reward-card" data-cat="donasi" data-pts="50" data-name="Donasi Bank Sampah Desa" onclick="selectReward(this)">
+                                    <div class="reward-card-img" style="background:#F1F8E9;">💚</div>
+                                    <div class="reward-check"><i class="bi bi-check"></i></div>
+                                    <div class="reward-card-body">
+                                        <span class="reward-cat" style="background:#E8F5E9;color:#2E7D32;">Donasi</span>
+                                        <div class="reward-name">Donasi Bank Sampah Desa</div>
+                                        <div class="reward-pts-row">
+                                            <div>
+                                                <div class="reward-pts">50 Pts</div>
+                                                <div class="reward-stock">Tanpa batas</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Virtual input for selected reward -->
+                                <input type="hidden" name="reward_name" id="hiddenRewardName">
+                                <input type="hidden" name="reward_pts" id="hiddenRewardPts">
+                            </div>
+                        </div>
+
+                        <!-- Panel: Konversi ke Uang -->
+                        <div id="panel-custom">
+                            <div class="mb-3">
+                                <label class="eco-label"><i class="bi bi-star-fill"></i> Jumlah Poin yang Ditukar</label>
+                                <div class="pts-input-wrap">
+                                    <input type="number" class="eco-input" name="pts_konversi" id="ptsKonversi"
+                                        placeholder="Masukkan jumlah poin..." min="10" max="200" step="10" value="50">
+                                    <span class="pts-suffix">Pts</span>
+                                </div>
+                                <div class="pts-presets">
+                                    <span class="pts-preset-btn" data-val="10">10 Pts</span>
+                                    <span class="pts-preset-btn" data-val="25">25 Pts</span>
+                                    <span class="pts-preset-btn active" data-val="50">50 Pts</span>
+                                    <span class="pts-preset-btn" data-val="100">100 Pts</span>
+                                    <span class="pts-preset-btn" data-val="200">Semua</span>
+                                </div>
+                            </div>
+
+                            <!-- Conversion Display -->
+                            <div class="conversion-box">
+                                <div class="conv-side">
+                                    <div class="conv-val" id="convPts" style="color:var(--primary);">50</div>
+                                    <div class="conv-lbl">Poin Ditukar</div>
+                                </div>
+                                <div class="conv-arrow"><i class="bi bi-arrow-right-circle-fill"></i></div>
+                                <div class="conv-side">
+                                    <div class="conv-val" id="convRp" style="color:#2E7D32;">Rp 50.000</div>
+                                    <div class="conv-lbl">Nominal Uang</div>
+                                </div>
+                            </div>
+                            <p style="font-size:11px;color:var(--text-muted);margin-top:10px;font-weight:600;">
+                                <i class="bi bi-info-circle"></i> Rate: 1 Poin = Rp 1.000 · Min. 10 Poin
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Data Penerima / Tujuan -->
+                    <div class="form-card fade-in">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="section-step">2</span>
+                            <div class="form-card-title">Data Penerima</div>
+                        </div>
+                        <div class="form-card-sub">Masukkan informasi pengiriman reward atau tujuan transfer</div>
+
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label class="eco-label"><i class="bi bi-person-fill"></i> Nama Lengkap</label>
+                                <input type="text" class="eco-input" name="nama_penerima"
+                                    placeholder="Nama sesuai KTP / akun..." value="Matt Shadows">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="eco-label"><i class="bi bi-telephone-fill"></i> Nomor HP / WhatsApp</label>
+                                <input type="tel" class="eco-input" name="no_hp"
+                                    placeholder="08xx-xxxx-xxxx">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="eco-label"><i class="bi bi-envelope-fill"></i> Email</label>
+                                <input type="email" class="eco-input" name="email"
+                                    placeholder="email@contoh.com">
+                            </div>
+                            <div class="col-sm-6" id="deliveryMethodField">
+                                <label class="eco-label"><i class="bi bi-send-fill"></i> Metode Pengiriman Voucher</label>
+                                <select class="eco-input" name="delivery_method">
+                                    <option value="">Pilih...</option>
+                                    <option>WhatsApp</option>
+                                    <option>Email</option>
+                                    <option>Ambil Langsung di Bank Sampah</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="eco-label"><i class="bi bi-chat-left-text-fill"></i> Catatan <span style="font-weight:400;color:var(--text-muted);font-size:11px;">(opsional)</span></label>
+                            <textarea class="eco-input" name="catatan"
+                                placeholder="Contoh: Kirim ke nomor suami, untuk hadiah ulang tahun..."></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ── RIGHT: SUMMARY & INFO ── -->
+                <div class="col-lg-4">
+
+                    <!-- Poin Balance -->
+                    <div class="info-box fade-in" style="background:linear-gradient(135deg,#E3F2FD,#EDE7F6);border:1.5px solid #BBDEFB;">
+                        <div class="info-box-title" style="margin-bottom:16px;">
+                            <i class="bi bi-wallet2" style="color:var(--primary);"></i> Saldo Poin Kamu
+                        </div>
+                        <div style="font-size:38px;font-weight:900;color:var(--primary);line-height:1;">200</div>
+                        <div style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:14px;">Poin Tersedia</div>
+                        <div style="height:6px;background:#BBDEFB;border-radius:6px;overflow:hidden;">
+                            <div style="width:40%;height:100%;background:linear-gradient(90deg,#1565C0,#42A5F5);border-radius:6px;"></div>
+                        </div>
+                        <div style="font-size:11px;color:var(--text-muted);font-weight:600;margin-top:6px;">80 Poin sudah ditukar bulan ini</div>
+                    </div>
+
+                    <!-- Ringkasan -->
+                    <div class="info-box fade-in">
+                        <div class="info-box-title"><i class="bi bi-receipt-cutoff"></i> Ringkasan Penukaran</div>
+                        <div class="summary-box">
+                            <div class="summary-row">
+                                <span class="summary-key"><i class="bi bi-gift-fill"></i> Reward Dipilih</span>
+                                <span class="summary-val" id="sumReward">—</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-key"><i class="bi bi-star-fill"></i> Poin Digunakan</span>
+                                <span class="summary-val" id="sumPtsUsed">—</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-key"><i class="bi bi-star"></i> Sisa Poin</span>
+                                <span class="summary-val" id="sumPtsLeft" style="color:#2E7D32;">200</span>
+                            </div>
+                            <div class="summary-total">
+                                <div>
+                                    <div class="summary-total-key">Nilai Reward</div>
+                                    <div class="summary-pts-lbl">estimasi nilai tukar</div>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div class="summary-pts" id="sumNilai">—</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit mt-4">
+                            <i class="bi bi-arrow-left-right"></i> Tukarkan Poin Sekarang
+                        </button>
+                        <a href="/dashboard" class="btn-cancel">
+                            <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
+                        </a>
+                    </div>
+
+                    <!-- Riwayat Penukaran -->
+                    <div class="info-box fade-in">
+                        <div class="info-box-title"><i class="bi bi-clock-history"></i> Riwayat Penukaran</div>
+                        <div class="history-item">
+                            <div class="history-icon" style="background:#FFF8E1;color:#F57F17;">🛒</div>
+                            <div style="flex:1;">
+                                <div class="history-name">Voucher Alfamart</div>
+                                <div class="history-date">5 Mar 2026</div>
+                            </div>
+                            <div class="history-pts" style="color:#E65100;">-50 Pts</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon" style="background:#E8F5E9;color:#2E7D32;">🌱</div>
+                            <div style="flex:1;">
+                                <div class="history-name">Donasi Tanam Pohon</div>
+                                <div class="history-date">20 Feb 2026</div>
+                            </div>
+                            <div class="history-pts" style="color:#E65100;">-30 Pts</div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-icon" style="background:#FCE4EC;color:#AD1457;">🍔</div>
+                            <div style="flex:1;">
+                                <div class="history-name">Voucher GrabFood</div>
+                                <div class="history-date">10 Feb 2026</div>
+                            </div>
+                            <div class="history-pts" style="color:#E65100;">-60 Pts</div>
+                        </div>
+                    </div>
+
+                    <!-- Tips -->
+                    <div class="tip-card fade-in">
+                        <div class="tip-card-title"><i class="bi bi-lightbulb-fill"></i> Tips Penukaran</div>
+                        <div class="tip-item">Poin tidak memiliki masa kadaluarsa, tapi reward stok terbatas.</div>
+                        <div class="tip-item">Voucher dikirim dalam 1×24 jam setelah konfirmasi.</div>
+                        <div class="tip-item">Konversi ke uang langsung masuk ke saldo Bank Sampah.</div>
+                        <div class="tip-item">Min. penukaran konversi uang: 10 Poin = Rp 10.000.</div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div><!-- /main-content -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const MY_POINTS = 200;
+
+        // ── TAB SWITCH ──
+        function switchTab(tab) {
+            document.getElementById('panel-katalog').style.display = tab === 'katalog' ? 'block' : 'none';
+            document.getElementById('panel-custom').style.display  = tab === 'custom'  ? 'block' : 'none';
+            document.getElementById('tab-katalog').classList.toggle('active', tab === 'katalog');
+            document.getElementById('tab-custom').classList.toggle('active', tab === 'custom');
+            document.getElementById('deliveryMethodField').style.display = tab === 'katalog' ? '' : 'none';
+
+            if (tab === 'custom') {
+                updateConversion();
+            } else {
+                const sel = document.querySelector('.reward-card.selected');
+                if (sel) updateSummary(sel.dataset.name, parseInt(sel.dataset.pts));
+                else resetSummary();
+            }
+        }
+
+        // ── REWARD FILTER ──
+        function filterReward(btn, cat) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.reward-card').forEach(c => {
+                c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+            });
+        }
+
+        // ── SELECT REWARD ──
+        function selectReward(card) {
+            document.querySelectorAll('.reward-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            const name = card.dataset.name;
+            const pts  = parseInt(card.dataset.pts);
+            document.getElementById('hiddenRewardName').value = name;
+            document.getElementById('hiddenRewardPts').value  = pts;
+            updateSummary(name, pts);
+        }
+
+        function updateSummary(name, pts) {
+            document.getElementById('sumReward').textContent  = name;
+            document.getElementById('sumPtsUsed').textContent = pts + ' Pts';
+            const left = MY_POINTS - pts;
+            document.getElementById('sumPtsLeft').textContent = left >= 0 ? left + ' Pts' : '⚠ Tidak cukup';
+            document.getElementById('sumPtsLeft').style.color = left >= 0 ? '#2E7D32' : '#E65100';
+            document.getElementById('sumNilai').textContent   = 'Rp ' + (pts * 1000).toLocaleString('id-ID');
+        }
+
+        function resetSummary() {
+            document.getElementById('sumReward').textContent  = '—';
+            document.getElementById('sumPtsUsed').textContent = '—';
+            document.getElementById('sumPtsLeft').textContent = MY_POINTS + ' Pts';
+            document.getElementById('sumPtsLeft').style.color = '#2E7D32';
+            document.getElementById('sumNilai').textContent   = '—';
+        }
+
+        // ── CONVERSION ──
+        const ptsKonversiInput = document.getElementById('ptsKonversi');
+
+        function updateConversion() {
+            const pts = Math.max(0, parseInt(ptsKonversiInput.value) || 0);
+            document.getElementById('convPts').textContent = pts;
+            document.getElementById('convRp').textContent  = 'Rp ' + (pts * 1000).toLocaleString('id-ID');
+            const left = MY_POINTS - pts;
+            document.getElementById('sumReward').textContent  = 'Konversi ke Uang';
+            document.getElementById('sumPtsUsed').textContent = pts + ' Pts';
+            document.getElementById('sumPtsLeft').textContent = left >= 0 ? left + ' Pts' : '⚠ Tidak cukup';
+            document.getElementById('sumPtsLeft').style.color = left >= 0 ? '#2E7D32' : '#E65100';
+            document.getElementById('sumNilai').textContent   = 'Rp ' + (pts * 1000).toLocaleString('id-ID');
+        }
+
+        ptsKonversiInput.addEventListener('input', updateConversion);
+
+        // Preset pts buttons
+        document.querySelectorAll('.pts-preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.pts-preset-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                ptsKonversiInput.value = btn.dataset.val;
+                updateConversion();
+            });
+        });
+    </script>
+</body>
+
+</html>

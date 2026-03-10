@@ -37,3 +37,15 @@ exports.settingsProfile = (req, res) => {
 exports.settingsSecurity = (req, res) => {
     res.render('settingsSecurity', { activePage: 'settings' });
 };
+
+exports.depositSampah = (req, res) => {
+    res.render('depositSampah', { activePage: 'deposit' });
+};
+
+exports.exchangePoints = (req, res) => {
+    res.render('exchangePoints', { activePage: 'exchange' });
+};
+
+exports.withdrawMoney = (req, res) => {
+    res.render('withdrawMoney', { activePage: 'withdraw' });
+};

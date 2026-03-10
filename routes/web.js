@@ -12,5 +12,8 @@ router.get('/settings', HomeController.settings);
 router.get('/settings/account', HomeController.settingsAccount);
 router.get('/settings/profile', HomeController.settingsProfile);
 router.get('/settings/security', HomeController.settingsSecurity);
+router.get('/deposit', HomeController.depositSampah);
+router.get('/exchange', HomeController.exchangePoints);
+router.get('/withdraw', HomeController.withdrawMoney);
 
 module.exports = router;

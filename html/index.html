@@ -1,0 +1,1593 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bank Sampah — Ubah Sampah Menjadi Berkah</title>
+    <meta name="description"
+        content="Bank Sampah adalah platform pengelolaan sampah modern yang mengubah sampahmu menjadi penghasilan nyata. Daftar sekarang dan mulai berkontribusi.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-dark: #1B5E20;
+            --primary-light: #E8F5E9;
+            --primary-mid: #43A047;
+            --accent: #F9A825;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --bg-light: #F9FAFB;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* ========== NAVBAR ========== */
+        .landing-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 14px 0;
+            transition: box-shadow 0.3s;
+        }
+
+        .landing-nav.scrolled {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #6c63ff, var(--primary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-logo-text {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+
+        .landing-nav .nav-link {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .landing-nav .nav-link:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .landing-nav .nav-link-active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .btn-daftar {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 22px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-daftar:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-masuk {
+            color: var(--primary);
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .btn-masuk:hover {
+            color: var(--primary-dark);
+        }
+
+        /* ========== HERO ========== */
+        .hero-section {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            background: linear-gradient(160deg, #f0fdf4 0%, #ffffff 60%, #ecfdf5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(46, 125, 50, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 30px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .hero-badge.badge-green {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border: 1.5px solid #C8E6C9;
+        }
+
+        .hero-badge.badge-green .dot {
+            background: #2E7D32;
+        }
+
+        .hero-badge.badge-blue {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 1.5px solid #BBDEFB;
+        }
+
+        .hero-badge.badge-blue .dot {
+            background: #1565C0;
+        }
+
+        .hero-badge.badge-purple {
+            background: #F3E8FF;
+            color: #7C3AED;
+            border: 1.5px solid #E9D5FF;
+        }
+
+        .hero-badge.badge-purple .dot {
+            background: #7C3AED;
+        }
+
+        .hero-badge.badge-orange {
+            background: #FFF3E0;
+            color: #E65100;
+            border: 1.5px solid #FFE0B2;
+        }
+
+        .hero-badge.badge-orange .dot {
+            background: #E65100;
+        }
+
+        .hero-badge .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 5vw, 60px);
+            font-weight: 900;
+            line-height: 1.15;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .hero-title .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero-subtitle {
+            font-size: 17px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 500px;
+            margin-bottom: 36px;
+        }
+
+        .btn-hero-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 28px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-hero-primary:hover {
+            background: var(--primary-dark);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(46, 125, 50, 0.35);
+        }
+
+        .btn-hero-secondary {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 13px 24px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-hero-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero visual */
+        .hero-visual {
+            background: linear-gradient(135deg, #1a2e1a, #2d4a2d);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            min-height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=700&q=80') center/cover;
+            opacity: 0.25;
+        }
+
+        .hero-visual-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .play-btn {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 auto 16px;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .hero-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            margin-top: 24px;
+            justify-content: center;
+        }
+
+        .hero-bar {
+            width: 28px;
+            border-radius: 6px 6px 0 0;
+            background: rgba(78, 160, 80, 0.7);
+            transition: all 0.3s;
+        }
+
+        .hero-bar.active {
+            background: #4caf50;
+        }
+
+        /* Floating cards on hero */
+        .float-card {
+            position: absolute;
+            background: white;
+            border-radius: 14px;
+            padding: 12px 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 3;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .float-card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* ========== STATS BAR ========== */
+        .stats-bar {
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 32px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 50px;
+            background: #e5e7eb;
+            margin: auto;
+        }
+
+        /* ========== SECTION COMMON ========== */
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(26px, 4vw, 40px);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+        }
+
+        /* ========== HOW IT WORKS ========== */
+        .how-section {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px 28px;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .step-number.n1 {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .step-number.n2 {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .step-number.n3 {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .step-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .step-connector {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #d1d5db;
+            font-size: 24px;
+            z-index: 2;
+        }
+
+        /* ========== WASTE TYPES ========== */
+        .waste-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .waste-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .waste-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+        }
+
+        .waste-card {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .waste-card:hover {
+            transform: scale(1.02);
+        }
+
+        .waste-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .waste-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+        }
+
+        .waste-card-label {
+            position: absolute;
+            bottom: 14px;
+            left: 14px;
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .waste-card-sub {
+            font-size: 11px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .waste-card-last {
+            background: var(--primary-light);
+            border: 2px dashed var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .waste-card-last:hover {
+            background: #d1fae5;
+        }
+
+        /* ========== CALCULATOR ========== */
+        .calc-section {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .calc-card {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.07);
+        }
+
+        @media (max-width: 768px) {
+            .calc-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .calc-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .calc-select,
+        .calc-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+            background: white;
+        }
+
+        .calc-select:focus,
+        .calc-input:focus {
+            border-color: var(--primary);
+        }
+
+        .calc-result-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+            border-radius: 20px;
+            padding: 36px;
+            color: white;
+            text-align: center;
+        }
+
+        .calc-result-label {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .calc-result-amount {
+            font-size: 38px;
+            font-weight: 900;
+        }
+
+        .calc-result-sub {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-top: 6px;
+        }
+
+        .btn-hitung {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 24px;
+            font-weight: 700;
+            font-size: 14px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-hitung:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ========== COMMUNITY IMPACT ========== */
+        .impact-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .impact-stat {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .impact-number {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .impact-label {
+            font-size: 14px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        .impact-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        /* ========== TESTIMONIALS ========== */
+        .testi-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testi-card {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 28px;
+            height: 100%;
+            border: 1.5px solid #f0f0f0;
+            transition: all 0.3s;
+        }
+
+        .testi-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-light);
+            transform: translateY(-4px);
+        }
+
+        .testi-stars {
+            color: #f59e0b;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .testi-text {
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testi-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .testi-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .testi-role {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-section {
+            padding: 80px 0;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .cta-title .green {
+            color: var(--primary);
+        }
+
+        .cta-sub {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: #111827;
+            color: #9aa4b2;
+            padding: 60px 0 30px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #6c63ff, var(--primary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+
+        .footer-logo-text {
+            font-weight: 800;
+            font-size: 17px;
+            color: white;
+        }
+
+        .footer-desc {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #6b7280;
+            max-width: 240px;
+        }
+
+        .footer-heading {
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .footer-link {
+            display: block;
+            font-size: 13px;
+            color: #6b7280;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-mid);
+        }
+
+        .footer-bottom {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #1f2937;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #4b5563;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            background: #1f2937;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9aa4b2;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 991px) {
+            .step-connector {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 100px;
+            }
+
+            .hero-visual {
+                min-height: 280px;
+                margin-top: 40px;
+            }
+
+            .float-card {
+                display: none;
+            }
+
+            .stat-divider {
+                display: none;
+            }
+
+            .stat-item {
+                padding: 12px;
+            }
+
+            .waste-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .calc-result-box {
+                margin-top: 24px;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up:nth-child(2) {
+            transition-delay: 0.1s;
+        }
+
+        .fade-up:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .fade-up:nth-child(4) {
+            transition-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== LANDING NAVBAR COMPONENT ===== -->
+<nav class="landing-nav" id="landingNav">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+
+            <a href="index.html" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <i class="bi bi-recycle"></i>
+                </div>
+                <span class="nav-logo-text">BankSampah</span>
+            </a>
+
+            <div class="d-none d-lg-flex align-items-center gap-1">
+                <a href="index.html#cara-kerja" class="nav-link">Cara Kerja</a>
+                <a href="index.html#jenis-sampah" class="nav-link">Jenis Sampah</a>
+                <a href="index.html#kalkulator" class="nav-link">Kalkulator</a>
+                <a href="index.html#testimoni" class="nav-link">Testimoni</a>
+                <a href="about.html" class="nav-link ">Tentang
+                    Kami</a>
+                <a href="contact.html" class="nav-link ">Kontak</a>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                <a href="dashboard.html" class="btn-masuk">Masuk</a>
+                <a href="dashboard.html" class="btn-daftar">Daftar Sekarang</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+        <!-- ===== HERO ===== -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center g-5">
+
+                    <div class="col-lg-6">
+                        <div class="hero-badges">
+                            <span class="hero-badge badge-green"><span class="dot"></span>Plastik Keras</span>
+                            <span class="hero-badge badge-blue"><span class="dot"></span>Kertas & Kardus</span>
+                            <span class="hero-badge badge-purple"><span class="dot"></span>Elektronik</span>
+                            <span class="hero-badge badge-orange"><span class="dot"></span>Logam</span>
+                        </div>
+
+                        <h1 class="hero-title">
+                            Ubah Sampah Menjadi Berkah<br>
+                            <span class="highlight">Untuk Masa Depan</span>
+                        </h1>
+
+                        <p class="hero-subtitle">
+                            Kami hadir untuk memudahkan kamu dalam mengelola sampah rumah tangga menjadi penghasilan
+                            nyata.
+                            Daftar gratis, setor sampah, dan nikmati hasilnya!
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="index.html" class="btn-hero-primary">
+                                <i class="bi bi-arrow-right-circle-fill"></i>
+                                Mulai Sekarang
+                            </a>
+                            <a href="#cara-kerja" class="btn-hero-secondary">
+                                <i class="bi bi-play-circle"></i>
+                                Lihat Cara Kerja
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="hero-visual" style="position:relative;">
+
+                            <!-- Floating card 1 -->
+                            <div class="float-card" style="top:20px;left:-20px;animation-delay:0s;">
+                                <div class="float-card-icon" style="background:#E8F5E9;">♻️</div>
+                                <div>
+                                    <div style="font-size:11px;color:#6b7280;">Total Didaur Ulang</div>
+                                    <div style="color:#2E7D32;">12.4 Ton</div>
+                                </div>
+                            </div>
+
+                            <!-- Floating card 2 -->
+                            <div class="float-card" style="bottom:20px;right:-20px;animation-delay:2s;">
+                                <div class="float-card-icon" style="background:#FFF3E0;">💰</div>
+                                <div>
+                                    <div style="font-size:11px;color:#6b7280;">Penghasilan Bulan Ini</div>
+                                    <div style="color:#E65100;">Rp 2.1 Juta</div>
+                                </div>
+                            </div>
+
+                            <div class="hero-visual-content">
+                                <div class="play-btn">
+                                    <i class="bi bi-play-fill"></i>
+                                </div>
+                                <div style="color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:16px;">Lihat
+                                    bagaimana
+                                    cara kerjanya</div>
+                                <div class="hero-chart">
+                                    <div class="hero-bar" style="height:50px;"></div>
+                                    <div class="hero-bar" style="height:80px;"></div>
+                                    <div class="hero-bar active" style="height:120px;"></div>
+                                    <div class="hero-bar" style="height:90px;"></div>
+                                    <div class="hero-bar" style="height:110px;"></div>
+                                    <div class="hero-bar active" style="height:140px;"></div>
+                                    <div class="hero-bar" style="height:100px;"></div>
+                                </div>
+                                <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:12px;">Grafik Setoran
+                                    Bulanan</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== STATS BAR ===== -->
+        <section class="stats-bar">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-item fade-up">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Anggota Aktif</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-item fade-up">
+                            <div class="stat-number">12K+</div>
+                            <div class="stat-label">Kg Sampah Didaur Ulang</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 mt-3 mt-md-0">
+                        <div class="stat-item fade-up">
+                            <div class="stat-number">Rp 2M+</div>
+                            <div class="stat-label">Total Penghasilan Dibagikan</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 mt-3 mt-md-0">
+                        <div class="stat-item fade-up">
+                            <div class="stat-number">350</div>
+                            <div class="stat-label">Transaksi per Bulan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section class="how-section" id="cara-kerja">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div class="section-label">Mudah & Cepat</div>
+                    <h2 class="section-title">Cara Kerja Mudah</h2>
+                    <p class="section-subtitle">
+                        Hanya butuh 3 langkah sederhana untuk mulai mendapatkan penghasilan dari sampah rumahmu.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4 fade-up">
+                        <div class="step-card">
+                            <div class="step-number n1">1</div>
+                            <div class="step-icon">🗃️</div>
+                            <h4 class="step-title">Pilih & Kumpulkan Sampah</h4>
+                            <p class="step-desc">Pilah sampah di rumahmu berdasarkan jenisnya — plastik, kertas, logam,
+                                atau
+                                elektronik. Makin banyak, makin besar penghasilanmu.</p>
+                            <div class="step-connector d-none d-md-block"><i class="bi bi-arrow-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-up">
+                        <div class="step-card">
+                            <div class="step-number n2">2</div>
+                            <div class="step-icon">🏦</div>
+                            <h4 class="step-title">Antar ke Bank Sampah</h4>
+                            <p class="step-desc">Datang ke titik pengumpulan terdekat atau jadwalkan penjemputan.
+                                Sampahmu
+                                akan ditimbang dan dihargai secara transparan dan adil.</p>
+                            <div class="step-connector d-none d-md-block"><i class="bi bi-arrow-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-up">
+                        <div class="step-card">
+                            <div class="step-number n3">3</div>
+                            <div class="step-icon">💰</div>
+                            <h4 class="step-title">Dapat Poin & Uang Tunai</h4>
+                            <p class="step-desc">Poin terkumpul bisa ditukarkan dengan uang tunai, voucher belanja, atau
+                                disumbangkan ke program lingkungan sosial pilihanmu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WASTE TYPES ===== -->
+        <section class="waste-section" id="jenis-sampah">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div class="section-label">Kami Terima</div>
+                    <h2 class="section-title">Jenis Sampah Diterima</h2>
+                    <p class="section-subtitle">
+                        Kami menerima berbagai jenis sampah yang masih memiliki nilai daur ulang dan dapat dikonversikan
+                        menjadi nilai ekonomi.
+                    </p>
+                </div>
+
+                <div class="waste-grid">
+                    <div class="waste-card">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Plastik">
+                        <div class="waste-card-overlay"></div>
+                        <div class="waste-card-label">
+                            Plastik
+                            <div class="waste-card-sub">Botol, ember, wadah</div>
+                        </div>
+                    </div>
+                    <div class="waste-card">
+                        <img src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=400&q=80" alt="Kertas">
+                        <div class="waste-card-overlay"></div>
+                        <div class="waste-card-label">
+                            Kertas & Kardus
+                            <div class="waste-card-sub">Koran, box, majalah</div>
+                        </div>
+                    </div>
+                    <div class="waste-card">
+                        <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&q=80" alt="Logam">
+                        <div class="waste-card-overlay"></div>
+                        <div class="waste-card-label">
+                            Logam & Besi
+                            <div class="waste-card-sub">Kaleng, besi tua</div>
+                        </div>
+                    </div>
+                    <div class="waste-card">
+                        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=400&q=80" alt="Kaca">
+                        <div class="waste-card-overlay"></div>
+                        <div class="waste-card-label">
+                            Kaca & Botol
+                            <div class="waste-card-sub">Botol beling, kaca pecah</div>
+                        </div>
+                    </div>
+                    <div class="waste-card">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80"
+                            alt="Elektronik">
+                        <div class="waste-card-overlay"></div>
+                        <div class="waste-card-label">
+                            Elektronik
+                            <div class="waste-card-sub">HP, laptop, kabel</div>
+                        </div>
+                    </div>
+                    <div class="waste-card-last d-flex flex-column">
+                        <i class="bi bi-plus-circle" style="font-size:32px;"></i>
+                        <span>Lihat Semua</span>
+                        <small style="font-size:12px;font-weight:400;color:#6b7280;">20+ jenis sampah diterima</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CALCULATOR ===== -->
+        <section class="calc-section" id="kalkulator">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div class="section-label">Estimasi Penghasilan</div>
+                    <h2 class="section-title">Hitung Potensi Penghasilanmu</h2>
+                    <p class="section-subtitle">
+                        Masukkan jenis dan jumlah sampah yang kamu miliki untuk mengetahui estimasi penghasilan yang
+                        bisa
+                        kamu dapatkan.
+                    </p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="row g-5 align-items-center">
+
+                        <div class="col-lg-7">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="calc-label">Jenis Sampah</label>
+                                    <select class="calc-select" id="calcType">
+                                        <option value="">-- Pilih Jenis --</option>
+                                        <option value="1500">Plastik Keras (Rp 1.500/kg)</option>
+                                        <option value="1000">Plastik Lunak (Rp 1.000/kg)</option>
+                                        <option value="800">Kertas HVS (Rp 800/kg)</option>
+                                        <option value="500">Kardus (Rp 500/kg)</option>
+                                        <option value="3000">Besi/Logam (Rp 3.000/kg)</option>
+                                        <option value="2000">Aluminium (Rp 2.000/kg)</option>
+                                        <option value="5000">Tembaga (Rp 5.000/kg)</option>
+                                        <option value="400">Kaca (Rp 400/kg)</option>
+                                        <option value="10000">Elektronik (Rp 10.000/kg)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="calc-label">Berat Sampah (kg)</label>
+                                    <input type="number" class="calc-input" id="calcWeight" placeholder="Contoh: 10"
+                                        min="0.1" step="0.1">
+                                </div>
+                                <div class="col-12">
+                                    <label class="calc-label">Frekuensi Setor</label>
+                                    <select class="calc-select" id="calcFreq">
+                                        <option value="1">1x sebulan</option>
+                                        <option value="2">2x sebulan</option>
+                                        <option value="4" selected>Setiap minggu (4x)</option>
+                                        <option value="8">2x seminggu (8x)</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn-hitung" onclick="hitungPenghasilan()">
+                                        <i class="bi bi-calculator"></i>
+                                        Hitung Penghasilanku
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="calc-result-box">
+                                <div class="calc-result-label">Estimasi Penghasilan Bulanan</div>
+                                <div class="calc-result-amount" id="calcResult">Rp 0</div>
+                                <div class="calc-result-sub" id="calcResultSub">Masukkan data di kiri untuk melihat
+                                    estimasi
+                                </div>
+                                <div
+                                    style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.2);">
+                                    <div style="font-size:13px;opacity:0.7;margin-bottom:8px;">Estimasi per Sekali Setor
+                                    </div>
+                                    <div style="font-size:22px;font-weight:700;" id="calcPerSetor">Rp 0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== COMMUNITY IMPACT ===== -->
+        <section class="impact-section">
+            <div class="container" style="position:relative;z-index:2;">
+                <div class="text-center mb-5">
+                    <div
+                        style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">
+                        Dampak Nyata</div>
+                    <h2 class="section-title" style="color:white;">Dampak Bagi Komunitas</h2>
+                    <p class="section-subtitle" style="color:rgba(255,255,255,0.7);max-width:500px;margin:0 auto 50px;">
+                        Bersama-sama, kita telah menciptakan perubahan nyata bagi lingkungan dan masyarakat sekitar
+                        kita.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-6 col-md-3 fade-up">
+                        <div class="impact-stat">
+                            <div class="impact-icon">👥</div>
+                            <div class="impact-number">500+</div>
+                            <div class="impact-label">Anggota Aktif di Seluruh Kota</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 fade-up">
+                        <div class="impact-stat">
+                            <div class="impact-icon">♻️</div>
+                            <div class="impact-number">12K+</div>
+                            <div class="impact-label">Kilogram Sampah Didaur Ulang</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 fade-up">
+                        <div class="impact-stat">
+                            <div class="impact-icon">💵</div>
+                            <div class="impact-number">Rp 2M</div>
+                            <div class="impact-label">Total Penghasilan Dibagikan</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 fade-up">
+                        <div class="impact-stat">
+                            <div class="impact-icon">🌱</div>
+                            <div class="impact-number">350</div>
+                            <div class="impact-label">Pohon Setara CO₂ Diselamatkan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TESTIMONIALS ===== -->
+        <section class="testi-section" id="testimoni">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div class="section-label">Kata Mereka</div>
+                    <h2 class="section-title">Dibuktikan oleh Anggota Kami</h2>
+                    <p class="section-subtitle">
+                        Ribuan keluarga telah merasakan manfaat nyata dari program Bank Sampah kami.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4 fade-up">
+                        <div class="testi-card">
+                            <div class="testi-stars">★★★★★</div>
+                            <p class="testi-text">
+                                "Awalnya saya pikir cuma hobi, ternyata dalam sebulan bisa dapat Rp 350.000 dari sampah
+                                plastik rumah. Sekarang saya bahkan minta sampah tetangga!"
+                            </p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">SI</div>
+                                <div>
+                                    <div class="testi-name">Siti Nurhaliza</div>
+                                    <div class="testi-role">Ibu Rumah Tangga, Bandung</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-up">
+                        <div class="testi-card">
+                            <div class="testi-stars">★★★★★</div>
+                            <p class="testi-text">
+                                "Sebagai guru SD, saya ajak murid-murid ikut program ini. Selain dapat uang untuk tas
+                                kelas,
+                                anak-anak jadi lebih peduli lingkungan. Luar biasa!"
+                            </p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">BD</div>
+                                <div>
+                                    <div class="testi-name">Budi Santoso</div>
+                                    <div class="testi-role">Guru SD, Jakarta Timur</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-up">
+                        <div class="testi-card">
+                            <div class="testi-stars">★★★★☆</div>
+                            <p class="testi-text">
+                                "Aplikasinya mudah dipakai bahkan oleh orang tua seperti saya. Penjemputan dilakukan
+                                tepat
+                                waktu dan timbangan selalu jujur. Sangat direkomendasikan!"
+                            </p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">DR</div>
+                                <div>
+                                    <div class="testi-name">Dewi Rahayu</div>
+                                    <div class="testi-role">Pensiunan, Surabaya</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA SECTION ===== -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="cta-title">
+                    Siap Menjadi<br>
+                    <span class="green">Pahlawan Lingkungan?</span>
+                </h2>
+                <p class="cta-sub">
+                    Bergabunglah dengan ratusan keluarga yang telah merasakan manfaat nyata. Daftar gratis sekarang dan
+                    mulai perjalananmu menuju hidup yang lebih hijau dan sejahtera.
+                </p>
+                <div class="d-flex justify-content-center flex-wrap gap-3">
+                    <a href="index.html" class="btn-hero-primary">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Daftar Sekarang
+                    </a>
+                    <a href="#cara-kerja" class="btn-hero-secondary">
+                        <i class="bi bi-info-circle"></i>
+                        Pelajari Lebih
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row g-4">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon"><i class="bi bi-recycle"></i></div>
+                            <span class="footer-logo-text">BankSampah</span>
+                        </div>
+                        <p class="footer-desc">
+                            Platform pengelolaan sampah digital yang menghubungkan masyarakat dengan pusat daur ulang
+                            untuk
+                            menciptakan lingkungan yang lebih bersih dan ekonomi yang lebih baik.
+                        </p>
+                        <div class="social-links mt-4">
+                            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-6">
+                        <div class="footer-heading">Program</div>
+                        <a href="#" class="footer-link">Deposit Sampah</a>
+                        <a href="#" class="footer-link">Tukar Poin</a>
+                        <a href="#" class="footer-link">Tarik Dana</a>
+                        <a href="#" class="footer-link">Jadwal Antar</a>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-6">
+                        <div class="footer-heading">Layanan</div>
+                        <a href="#" class="footer-link">Tentang Kami</a>
+                        <a href="#" class="footer-link">Cara Kerja</a>
+                        <a href="#" class="footer-link">Jenis Sampah</a>
+                        <a href="#" class="footer-link">Kalkulator</a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-heading">Hubungi Kami</div>
+                        <a href="#" class="footer-link"><i class="bi bi-envelope me-2"></i>info@banksampah.id</a>
+                        <a href="#" class="footer-link"><i class="bi bi-telephone me-2"></i>0800-1234-5678</a>
+                        <a href="#" class="footer-link"><i class="bi bi-geo-alt me-2"></i>Bandung, Jawa Barat</a>
+                        <div style="margin-top:16px;">
+                            <div style="font-size:12px;color:#4b5563;margin-bottom:8px;">Jam Operasional</div>
+                            <div style="font-size:13px;color:#6b7280;">Senin – Sabtu, 08.00 – 17.00 WIB</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-bottom">
+                    <span>© 2026 BankSampah. Hak Cipta Dilindungi.</span>
+                    <div class="d-flex gap-4">
+                        <a href="#" style="color:#4b5563;text-decoration:none;font-size:13px;">Kebijakan Privasi</a>
+                        <a href="#" style="color:#4b5563;text-decoration:none;font-size:13px;">Syarat & Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('landingNav');
+                nav.classList.toggle('scrolled', window.scrollY > 20);
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(el => {
+                el.addEventListener('click', e => {
+                    const target = document.querySelector(el.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Fade-up animation on scroll
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+            // Hero badge toggle
+            document.querySelectorAll('.hero-badge').forEach(badge => {
+                badge.addEventListener('click', function () {
+                    document.querySelectorAll('.hero-badge').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Calculator
+            function hitungPenghasilan() {
+                const harga = parseInt(document.getElementById('calcType').value) || 0;
+                const berat = parseFloat(document.getElementById('calcWeight').value) || 0;
+                const frekuensi = parseInt(document.getElementById('calcFreq').value) || 1;
+
+                const perSetor = harga * berat;
+                const bulanan = perSetor * frekuensi;
+
+                const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
+
+                document.getElementById('calcResult').textContent = fmt(bulanan);
+                document.getElementById('calcPerSetor').textContent = fmt(perSetor);
+
+                if (bulanan > 0) {
+                    document.getElementById('calcResultSub').textContent =
+                        `Dari ${berat} kg × ${frekuensi}x sebulan @ Rp ${harga.toLocaleString('id-ID')}/kg`;
+                }
+            }
+
+            // Auto-calculate on input change
+            ['calcType', 'calcWeight', 'calcFreq'].forEach(id => {
+                document.getElementById(id).addEventListener('change', hitungPenghasilan);
+            });
+            document.getElementById('calcWeight').addEventListener('input', hitungPenghasilan);
+        </script>
+
+</body>
+
+</html>

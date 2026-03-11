@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Settings - Bank Sampah</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/layout.css">
+
+    <style>
+        body {
+            background: #fdfdfd;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+        }
+
+        .settings-container {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04);
+            padding: 30px;
+            border: 1px solid #eef0f4;
+            margin-bottom: 30px;
+            max-width: 1000px;
+        }
+
+        .settings-header {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs {
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 30px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 2px;
+        }
+
+        /* Hide scrollbar for tabs */
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tabs {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .nav-tabs .nav-link {
+            color: #6c757d;
+            border: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            margin-bottom: -1px;
+            position: relative;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: #495057;
+            border: none;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #111;
+            background: transparent;
+            border: none;
+        }
+
+        .nav-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: #2E7D32;
+            /* Accent color matching image */
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 5px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        .settings-row {
+            padding: 25px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Color Picker */
+        .color-picker-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .color-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #2E7D32;
+        }
+
+        .color-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .color-input-wrapper input {
+            border: 1px solid #dcdfe4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #333;
+            width: 120px;
+            background: #fff;
+            font-weight: 500;
+        }
+
+        /* Selecting cards */
+        .option-card {
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .option-card:hover {
+            border-color: #caced4;
+        }
+
+        .option-card.active {
+            border: 2px solid #2E7D32;
+            box-shadow: 0 0 0 4px rgba(68, 76, 231, 0.1);
+        }
+
+        .option-card-body {
+            padding: 15px;
+        }
+
+        .option-card-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 3px;
+            color: #212529;
+        }
+
+        .option-card-desc {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .check-icon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #2E7D32;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            border: 2px solid #fff;
+            opacity: 0;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-card.active .check-icon {
+            opacity: 1;
+            top: -6px;
+            right: -6px;
+        }
+
+        .mockup-img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+            padding: 10px;
+        }
+
+        /* Form Controls */
+        .form-select-custom {
+            border: 1px solid #dcdfe4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #333;
+            min-width: 250px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 12px 12px;
+            font-weight: 500;
+        }
+
+        .btn-cancel {
+            background: white;
+            border: 1px solid #dcdfe4;
+            color: #344054;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-cancel:hover {
+            background: #f9fafb;
+            color: #344054;
+        }
+
+        .btn-save {
+            background: #2E7D32;
+            border: 1px solid #2E7D32;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 8px 16px;
+            margin-left: 12px;
+            font-size: 14px;
+        }
+
+        .btn-save:hover {
+            background: #2E7D32;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .settings-container {
+                padding: 20px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+                margin-top: 70px;
+            }
+
+            .form-select-custom {
+                min-width: 100%;
+            }
+
+            .d-flex.justify-content-between.mb-2 {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .color-input-wrapper {
+                width: 100%;
+            }
+
+            .color-input-wrapper input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-white px-4 shadow-sm fixed-top bs-navbar">
+    <div class="container-fluid">
+
+        <!-- Left Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="index.html">
+            <div
+                style="width:34px;height:34px;background:linear-gradient(135deg,#6c63ff,#2E7D32);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <i class="bi bi-recycle text-white" style="font-size:17px;"></i>
+            </div>
+            <span class="fw-bold" style="font-size:16px;color:#1e293b;">Bank Sampah</span>
+        </a>
+
+        <!-- Center Menu -->
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav gap-4">
+                <li class="nav-item">
+                    <a class="nav-link text-muted fw-semibold "
+                        href="/deposit">Deposit Trash</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted fw-semibold "
+                        href="/exchange">Exchange Points</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted fw-semibold "
+                        href="/withdraw">Withdraw Money</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Right Side -->
+        <div class="d-flex align-items-center gap-3">
+
+            <!-- Search -->
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+
+            <!-- Notification -->
+            <button class="notif-btn">
+                <i class="bi bi-bell"></i>
+            </button>
+
+            <!-- Profile -->
+            <div class="d-flex align-items-center gap-2">
+                
+                    <div class="avatar-circle">M</div>
+                
+                <div>
+                    <div class="fw-bold" style="font-size:13px;line-height:1.2;">Matt Shadows</div>
+                    <div class="text-muted" style="font-size:11px;">Joined 3 Months ago</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>
+        <div class="sidebar">
+
+    <a href="dashboard.html" class="icon " title="Dashboard">
+        <i class="bi bi-house-fill"></i>
+    </a>
+
+    <a href="komunitas.html" class="icon " title="Komunitas">
+        <i class="bi bi-people-fill"></i>
+    </a>
+
+    <a href="berita.html" class="icon " title="Berita">
+        <i class="bi bi-newspaper"></i>
+    </a>
+
+    <div class="sidebar-spacer"></div>
+
+    <a href="settings.html" class="icon active" title="Pengaturan">
+        <i class="bi bi-gear"></i>
+    </a>
+
+</div>
+
+            <!-- MAIN -->
+            <div class="main-content">
+                <div class="settings-container">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <h1 class="settings-header">Settings</h1>
+                        <i class="bi bi-three-dots-vertical text-muted cursor-pointer fs-5"></i>
+                    </div>
+
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings-account.html">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings-profile.html">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings-security.html">Security</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="settings.html">Appearance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Notifications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Billing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Integrations</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <div>
+                            <h5 class="section-title">Appearance</h5>
+                            <p class="section-desc">Change how your public dashboard looks and feels.</p>
+                        </div>
+                        <div>
+                            <a href="#" class="text-decoration-none text-muted small"><i
+                                    class="bi bi-box-arrow-up-right me-1"></i>dashboard.untitledui.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Brand Color -->
+                    <div class="settings-row row align-items-center">
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <div class="section-title">Brand color</div>
+                            <div class="section-desc">Select or customize your brand color.</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="color-picker-box">
+                                <div class="color-circle"></div>
+                                <div class="color-input-wrapper">
+                                    <input type="text" value="#2E7D32" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard charts -->
+                    <div class="settings-row row">
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <div class="section-title">Dashboard charts</div>
+                            <div class="section-desc">How charts are displayed.</div>
+                            <a href="#" class="text-decoration-none small text-primary fw-medium mt-2 d-inline-block"
+                                style="color: #2E7D32 !important;">View examples</a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="option-card active">
+                                        <div class="check-icon"><i class="bi bi-check2"></i></div>
+                                        <div class="mockup-img d-flex"
+                                            style="background-image: linear-gradient(to bottom, #f0f2f5, #e4e7eb);">
+                                            <div
+                                                style="background: white; flex:1; border-radius: 6px; padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; border-top: 4px solid #f8f9fa;">
+                                                <div style="display:flex; gap: 4px; margin-bottom: 8px;">
+                                                    <div
+                                                        style="width: 5px; height: 5px; border-radius: 50%; background: #fc5c65;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 5px; height: 5px; border-radius: 50%; background: #fdcb6e;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 5px; height: 5px; border-radius: 50%; background: #26de81;">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    style="width: 30px; height: 3px; background: #dcdfe4; border-radius: 2px; margin-bottom: 8px;">
+                                                </div>
+                                                <div
+                                                    style="height: 2px; background: #2E7D32; width: 100%; margin-bottom: 2px;">
+                                                </div>
+                                                <div
+                                                    style="height: 2px; background: #a5b4fc; width: 85%; margin-bottom: 8px;">
+                                                </div>
+                                                <div
+                                                    style="height: 2px; background: #e0e0e0; width: 95%; margin-bottom: 2px;">
+                                                </div>
+                                                <div style="height: 2px; background: #e0e0e0; width: 65%;"></div>
+                                                <div
+                                                    style="position: absolute; right: 10px; top: 10px; width: 14px; height: 4px; background: #2E7D32; border-radius: 2px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="option-card-body">
+                                            <div class="option-card-title">Default</div>
+                                            <div class="option-card-desc">Default company branding.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="option-card">
+                                        <div class="check-icon"><i class="bi bi-check2"></i></div>
+                                        <div class="mockup-img d-flex"
+                                            style="background-image: linear-gradient(to bottom, #f0f2f5, #e4e7eb);">
+                                            <div
+                                                style="background: white; flex:1; border-radius: 6px; padding: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 4px solid #f8f9fa;">
+                                                <div style="display:flex; gap: 4px; margin-bottom: 8px;">
+                                                    <div
+                                                        style="width: 5px; height: 5px; border-radius: 50%; background: #fc5c65;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 5px; height: 5px; border-radius: 50%; background: #fdcb6e;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 5px; height: 5px; border-radius: 50%; background: #26de81;">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    style="width: 30px; height: 3px; background: #dcdfe4; border-radius: 2px; margin-bottom: 8px;">
+                                                </div>
+                                                <div
+                                                    style="height: 1px; background: #6c757d; width: 100%; margin-bottom: 3px;">
+                                                </div>
+                                                <div
+                                                    style="height: 1px; background: #adb5bd; width: 85%; margin-bottom: 8px;">
+                                                </div>
+                                                <div
+                                                    style="height: 1px; background: #e0e0e0; width: 95%; margin-bottom: 3px;">
+                                                </div>
+                                                <div style="height: 1px; background: #e0e0e0; width: 65%;"></div>
+                                                <div
+                                                    style="position: absolute; right: 10px; top: 10px; width: 14px; height: 4px; background: #6c757d; border-radius: 2px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="option-card-body">
+                                            <div class="option-card-title">Simplified</div>
+                                            <div class="option-card-desc">Minimal and modern.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="option-card">
+                                        <div class="check-icon"><i class="bi bi-check2"></i></div>
+                                        <div class="mockup-img d-flex align-items-center justify-content-center"
+                                            style="background-image: linear-gradient(to bottom, #e4e7eb, #d1d5db);">
+                                            <div class="bg-white rounded px-3 py-2 border shadow-sm fw-bold"
+                                                style="font-size: 13px; color: #344054;">
+                                                &lt;&gt; Edit CSS
+                                            </div>
+                                        </div>
+                                        <div class="option-card-body">
+                                            <div class="option-card-title">Custom CSS</div>
+                                            <div class="option-card-desc">Manage styling with CSS.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Language -->
+                    <div class="settings-row row align-items-center">
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <div class="section-title">Language</div>
+                            <div class="section-desc">Default language for public dashboard.</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="position-relative d-inline-block">
+                                <select class="form-select-custom ps-5">
+                                    <option>English (UK)</option>
+                                    <option>English (US)</option>
+                                    <option>Indonesian</option>
+                                </select>
+                                <div class="position-absolute" style="top: 8px; left: 14px; font-size: 16px;">
+                                    🇬🇧
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cookie banner -->
+                    <div class="settings-row row">
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <div class="section-title">Cookie banner</div>
+                            <div class="section-desc">Display cookie banners to visitors.</div>
+                            <a href="#" class="text-decoration-none small text-primary fw-medium mt-2 d-inline-block"
+                                style="color: #2E7D32 !important;">View examples</a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="option-card active">
+                                        <div class="check-icon"><i class="bi bi-check2"></i></div>
+                                        <div class="mockup-img p-3"
+                                            style="background-image: linear-gradient(to bottom, #f0f2f5, #e4e7eb);">
+                                            <div
+                                                style="background: white; height: 100%; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 6px solid #f8f9fa;">
+                                                <div
+                                                    style="background: #eef2f6; height: 12px; display:flex; align-items:center; padding: 0 4px; gap: 3px;">
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #fc5c65;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #fdcb6e;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #26de81;">
+                                                    </div>
+                                                </div>
+                                                <div style="background: #2E7D32; height: 4px; width: 100%;"></div>
+                                                <div style="display: flex; gap: 5px; padding: 6px;">
+                                                    <div
+                                                        style="width: 28px; height: 45px; background: #fff; border: 1px solid #eef0f4; border-radius: 3px; position:relative; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                                        <div
+                                                            style="position:absolute; bottom:3px; left:3px; right:3px; height:8px; background:#2E7D32; border-radius:2px;">
+                                                        </div>
+                                                    </div>
+                                                    <div style="flex: 1;">
+                                                        <div
+                                                            style="height: 18px; background: #f0f2f5; border-radius: 2px; margin-bottom: 4px;">
+                                                        </div>
+                                                        <div
+                                                            style="height: 18px; background: #f0f2f5; border-radius: 2px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="option-card-body">
+                                            <div class="option-card-title">Default</div>
+                                            <div class="option-card-desc">Cookie controls for visitors.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="option-card">
+                                        <div class="check-icon"><i class="bi bi-check2"></i></div>
+                                        <div class="mockup-img p-3"
+                                            style="background-image: linear-gradient(to bottom, #f0f2f5, #e4e7eb);">
+                                            <div
+                                                style="background: white; height: 100%; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 6px solid #f8f9fa;">
+                                                <div
+                                                    style="background: #eef2f6; height: 12px; display:flex; align-items:center; padding: 0 4px; gap: 3px;">
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #fc5c65;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #fdcb6e;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #26de81;">
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 5px; padding: 6px;">
+                                                    <div
+                                                        style="width: 28px; height: 45px; background: #fff; border: 1px solid #eef0f4; border-radius: 3px; position:relative; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                                        <div
+                                                            style="position:absolute; bottom:3px; left:8px; right:8px; height:3px; background:#2E7D32; border-radius:1px;">
+                                                        </div>
+                                                    </div>
+                                                    <div style="flex: 1;">
+                                                        <div
+                                                            style="height: 18px; background: #f0f2f5; border-radius: 2px; margin-bottom: 4px;">
+                                                        </div>
+                                                        <div
+                                                            style="height: 18px; background: #f0f2f5; border-radius: 2px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="option-card-body">
+                                            <div class="option-card-title">Simplified</div>
+                                            <div class="option-card-desc">Show a simplified banner.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="option-card">
+                                        <div class="check-icon"><i class="bi bi-check2"></i></div>
+                                        <div class="mockup-img p-3"
+                                            style="background-image: linear-gradient(to bottom, #f0f2f5, #e4e7eb);">
+                                            <div
+                                                style="background: white; height: 100%; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 6px solid #f8f9fa;">
+                                                <div
+                                                    style="background: #eef2f6; height: 12px; display:flex; align-items:center; padding: 0 4px; gap: 3px;">
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #fc5c65;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #fdcb6e;">
+                                                    </div>
+                                                    <div
+                                                        style="width: 4px; height: 4px; border-radius: 50%; background: #26de81;">
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 5px; padding: 6px;">
+                                                    <div
+                                                        style="width: 28px; height: 45px; background: #fff; border: 1px solid #eef0f4; border-radius: 3px; position:relative; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                                    </div>
+                                                    <div style="flex: 1;">
+                                                        <div
+                                                            style="height: 18px; background: #f0f2f5; border-radius: 2px; margin-bottom: 4px;">
+                                                        </div>
+                                                        <div
+                                                            style="height: 18px; background: #f0f2f5; border-radius: 2px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="option-card-body">
+                                            <div class="option-card-title">None</div>
+                                            <div class="option-card-desc">Don't show any banners.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer actions -->
+                    <div class="row mt-4 pt-3" style="border-top: 1px solid #eaeaea;">
+                        <div class="col-12 d-flex justify-content-end">
+                            <button class="btn btn-cancel">Cancel</button>
+                            <button class="btn btn-save">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Simple card selection logic - handled scoped to each row
+                document.querySelectorAll('.settings-row').forEach(row => {
+                    const cards = row.querySelectorAll('.option-card');
+                    cards.forEach(card => {
+                        card.addEventListener('click', () => {
+                            cards.forEach(c => c.classList.remove('active'));
+                            card.classList.add('active');
+                        });
+                    });
+                });
+            </script>
+</body>
+
+</html>

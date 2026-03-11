@@ -1,0 +1,1409 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/layout.css">
+    <title>Komunitas — Bank Sampah</title>
+
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-dark: #1B5E20;
+            --primary-light: #E8F5E9;
+            --primary-mid: #43A047;
+            --accent: #00BFA5;
+            --text-dark: #111827;
+            --text-muted: #6B7280;
+            --bg-light: #F3F7F3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-light);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* HERO */
+        .hero-banner {
+            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 45%, #388E3C 75%, #00695C 100%);
+            border-radius: 28px;
+            padding: 36px 40px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            color: white;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 280px;
+            height: 280px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: 120px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 30px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            margin-bottom: 14px;
+        }
+
+        .hero-greeting {
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .hero-sub {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 28px;
+        }
+
+        .hero-mini-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 12px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-stat-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .hero-stat-val {
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .hero-stat-lbl {
+            font-size: 11px;
+            opacity: 0.75;
+            font-weight: 500;
+        }
+
+        /* CARDS */
+        .card-custom {
+            border: none;
+            border-radius: 24px;
+            background: white;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.25s ease;
+        }
+
+        .card-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+        }
+
+        /* SECTION LABEL */
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        /* ECO STAT CARDS */
+        .eco-stat-card {
+            border-radius: 20px;
+            padding: 20px 22px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .eco-stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .eco-stat-card.green {
+            background: linear-gradient(135deg, #2E7D32, #43A047);
+        }
+
+        .eco-stat-card.teal {
+            background: linear-gradient(135deg, #00695C, #00897B);
+        }
+
+        .eco-stat-card.orange {
+            background: linear-gradient(135deg, #E65100, #F57C00);
+        }
+
+        .eco-stat-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+
+        .eco-stat-val {
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .eco-stat-lbl {
+            font-size: 12px;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        /* AVATAR */
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2E7D32, #43A047);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .avatar.sm {
+            width: 38px;
+            height: 38px;
+            font-size: 14px;
+        }
+
+        .avatar.b {
+            background: linear-gradient(135deg, #1565C0, #1976D2);
+        }
+
+        .avatar.s {
+            background: linear-gradient(135deg, #6A1B9A, #8E24AA);
+        }
+
+        .avatar.r {
+            background: linear-gradient(135deg, #E65100, #F57C00);
+        }
+
+        .avatar.d {
+            background: linear-gradient(135deg, #00695C, #00897B);
+        }
+
+        /* CREATE POST */
+        .create-post-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .create-post-input {
+            flex: 1;
+            background: var(--bg-light);
+            border: 1.5px solid transparent;
+            border-radius: 30px;
+            padding: 11px 20px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .create-post-input:focus {
+            border-color: var(--primary);
+        }
+
+        .create-post-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-post {
+            background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 22px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-post:hover {
+            opacity: 0.9;
+        }
+
+        .create-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #F3F7F3;
+        }
+
+        .create-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            border-radius: 20px;
+            background: var(--bg-light);
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .create-action-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* FILTER TABS */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1.5px solid #e5e7eb;
+            background: white;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* AVATAR PHOTO */
+        .avatar-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid #E8F5E9;
+        }
+
+        .avatar-img.sm {
+            width: 38px;
+            height: 38px;
+        }
+
+        /* POST CARD */
+        .post-card {
+            border: none;
+            border-radius: 24px;
+            background: white;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            padding: 24px;
+            transition: all 0.25s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.09);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .post-meta {
+            flex: 1;
+        }
+
+        .post-author {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .post-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .post-tag.tips {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .post-tag.event {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .post-tag.diskusi {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .post-tag.berita {
+            background: #F3E5F5;
+            color: #6A1B9A;
+        }
+
+        .post-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .post-body {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .post-img {
+            width: 100%;
+            height: 220px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 6px;
+            padding-top: 14px;
+            border-top: 1px solid #f3f7f3;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: transparent;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .action-btn.liked {
+            color: #E53935;
+        }
+
+        .action-btn i {
+            font-size: 15px;
+        }
+
+        /* RIGHT PANEL */
+        .panel-card {
+            background: white;
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            padding: 22px;
+            margin-bottom: 20px;
+            transition: all 0.25s ease;
+        }
+
+        .panel-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .panel-title-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: var(--primary);
+        }
+
+        /* TRENDING */
+        .trend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #F3F7F3;
+            cursor: pointer;
+        }
+
+        .trend-item:last-child {
+            border-bottom: none;
+        }
+
+        .trend-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .trend-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-dark);
+        }
+
+        .trend-count {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .trend-bar-wrap {
+            flex: 1;
+            height: 4px;
+            background: #F3F7F3;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .trend-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        /* SUGGESTED COMMUNITY */
+        .community-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #F3F7F3;
+        }
+
+        .community-item:last-child {
+            border-bottom: none;
+        }
+
+        .community-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .community-icon.g {
+            background: #E8F5E9;
+        }
+
+        .community-icon.t {
+            background: #E0F2F1;
+        }
+
+        .community-icon.b {
+            background: #FFF3E0;
+        }
+
+        .community-icon.p {
+            background: #F3E5F5;
+        }
+
+        .community-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-dark);
+        }
+
+        .community-members {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .btn-join {
+            margin-left: auto;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-join:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ECO CHALLENGE */
+        .challenge-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .challenge-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .challenge-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .challenge-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-dark);
+        }
+
+        .challenge-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .challenge-progress {
+            height: 5px;
+            background: #F3F7F3;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .challenge-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        /* ACTIVE MEMBERS */
+        .member-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #F3F7F3;
+        }
+
+        .member-item:last-child {
+            border-bottom: none;
+        }
+
+        .member-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-dark);
+        }
+
+        .member-posts {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .member-badge {
+            margin-left: auto;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .member-badge.gold {
+            background: #FFF8E1;
+            color: #F9A825;
+        }
+
+        .member-badge.silver {
+            background: #ECEFF1;
+            color: #546E7A;
+        }
+
+        .member-badge.green {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        /* FADE IN */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .fade-in:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .fade-in:nth-child(2) {
+            animation-delay: 0.10s;
+        }
+
+        .fade-in:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .fade-in:nth-child(4) {
+            animation-delay: 0.20s;
+        }
+
+        .fade-in:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-white px-4 shadow-sm fixed-top bs-navbar">
+    <div class="container-fluid">
+
+        <!-- Left Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="index.html">
+            <div
+                style="width:34px;height:34px;background:linear-gradient(135deg,#6c63ff,#2E7D32);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <i class="bi bi-recycle text-white" style="font-size:17px;"></i>
+            </div>
+            <span class="fw-bold" style="font-size:16px;color:#1e293b;">Bank Sampah</span>
+        </a>
+
+        <!-- Center Menu -->
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav gap-4">
+                <li class="nav-item">
+                    <a class="nav-link text-muted fw-semibold "
+                        href="/deposit">Deposit Trash</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted fw-semibold "
+                        href="/exchange">Exchange Points</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-muted fw-semibold "
+                        href="/withdraw">Withdraw Money</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Right Side -->
+        <div class="d-flex align-items-center gap-3">
+
+            <!-- Search -->
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+
+            <!-- Notification -->
+            <button class="notif-btn">
+                <i class="bi bi-bell"></i>
+            </button>
+
+            <!-- Profile -->
+            <div class="d-flex align-items-center gap-2">
+                
+                    <div class="avatar-circle">M</div>
+                
+                <div>
+                    <div class="fw-bold" style="font-size:13px;line-height:1.2;">Matt Shadows</div>
+                    <div class="text-muted" style="font-size:11px;">Joined 3 Months ago</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>
+        <div class="sidebar">
+
+    <a href="dashboard.html" class="icon " title="Dashboard">
+        <i class="bi bi-house-fill"></i>
+    </a>
+
+    <a href="komunitas.html" class="icon active" title="Komunitas">
+        <i class="bi bi-people-fill"></i>
+    </a>
+
+    <a href="berita.html" class="icon " title="Berita">
+        <i class="bi bi-newspaper"></i>
+    </a>
+
+    <div class="sidebar-spacer"></div>
+
+    <a href="settings.html" class="icon " title="Pengaturan">
+        <i class="bi bi-gear"></i>
+    </a>
+
+</div>
+
+            <div class="main-content">
+
+                <!-- HERO -->
+                <div class="hero-banner fade-in">
+                    <div class="hero-badge">
+                        <i class="bi bi-people-fill"></i> Komunitas Hijau
+                    </div>
+                    <div class="hero-greeting">Bersama Kita Lebih Kuat 🌿</div>
+                    <div class="hero-sub">Bergabunglah, berbagi tips, dan inspirasi sesama pejuang lingkungan.</div>
+                    <div class="hero-mini-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon"><i class="bi bi-people-fill"></i></div>
+                            <div>
+                                <div class="hero-stat-val">4.2k</div>
+                                <div class="hero-stat-lbl">Anggota Aktif</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon"><i class="bi bi-chat-dots-fill"></i></div>
+                            <div>
+                                <div class="hero-stat-val">128</div>
+                                <div class="hero-stat-lbl">Postingan Hari Ini</div>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-icon"><i class="bi bi-fire"></i></div>
+                            <div>
+                                <div class="hero-stat-val">37</div>
+                                <div class="hero-stat-lbl">Tantangan Aktif</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ECO STAT CARDS -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4 fade-in">
+                        <div class="eco-stat-card green">
+                            <div class="eco-stat-icon"><i class="bi bi-recycle"></i></div>
+                            <div class="eco-stat-val">12.4 ton</div>
+                            <div class="eco-stat-lbl">Sampah Didaur Komunitas</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in">
+                        <div class="eco-stat-card teal">
+                            <div class="eco-stat-icon"><i class="bi bi-tree-fill"></i></div>
+                            <div class="eco-stat-val">830</div>
+                            <div class="eco-stat-lbl">Pohon Terselamatkan</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-in">
+                        <div class="eco-stat-card orange">
+                            <div class="eco-stat-icon"><i class="bi bi-award-fill"></i></div>
+                            <div class="eco-stat-val">215</div>
+                            <div class="eco-stat-lbl">Tantangan Diselesaikan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAIN LAYOUT -->
+                <div class="row g-4">
+
+                    <!-- FEED LEFT -->
+                    <div class="col-lg-8">
+
+                        <!-- Create Post -->
+                        <div class="card-custom p-4 mb-4 fade-in">
+                            <div class="create-post-wrap">
+                                <img src="https://randomuser.me/api/portraits/men/11.jpg" class="avatar-img"
+                                    alt="profil">
+                                <input type="text" class="create-post-input"
+                                    placeholder="Bagikan cerita atau tips lingkungan hari ini...">
+                                <button class="btn-post">Posting</button>
+                            </div>
+                            <div class="create-actions">
+                                <button class="create-action-btn"><i class="bi bi-image"></i> Foto</button>
+                                <button class="create-action-btn"><i class="bi bi-camera-video"></i> Video</button>
+                                <button class="create-action-btn"><i class="bi bi-emoji-smile"></i> Ekspresi</button>
+                                <button class="create-action-btn"><i class="bi bi-geo-alt"></i> Lokasi</button>
+                            </div>
+                        </div>
+
+                        <!-- Filter Tabs -->
+                        <div class="d-flex align-items-center justify-content-between mb-3 fade-in">
+                            <div class="filter-tabs">
+                                <div class="filter-tab active">Semua</div>
+                                <div class="filter-tab">Tips</div>
+                                <div class="filter-tab">Event</div>
+                                <div class="filter-tab">Diskusi</div>
+                                <div class="filter-tab">Berita</div>
+                            </div>
+                            <small class="text-muted" style="font-size:12px; flex-shrink:0;">128 postingan</small>
+                        </div>
+
+                        <!-- Post 1 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/men/10.jpg" class="avatar-img sm"
+                                    alt="Budi Santoso">
+                                <div class="post-meta">
+                                    <div class="post-author">Budi Santoso</div>
+                                    <div class="post-time">2 jam lalu &middot; Bandung</div>
+                                </div>
+                                <span class="post-tag tips">Tips</span>
+                            </div>
+                            <div class="post-title">Cara Memilah Sampah Plastik di Rumah 🧴</div>
+                            <div class="post-body">
+                                Jangan campur plastik kotor dengan plastik bersih. Pisahkan berdasarkan jenisnya
+                                agar proses daur ulang lebih efektif. Mulai dari botol PET, HDPE, hingga kantong kresek
+                                —
+                                semua punya nilai jual!
+                            </div>
+                            <div class="post-actions">
+                                <button class="action-btn liked"><i class="bi bi-heart-fill"></i> 120</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 35</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 12</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 2 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/women/22.jpg" class="avatar-img sm"
+                                    alt="Siti Rahma">
+                                <div class="post-meta">
+                                    <div class="post-author">Siti Rahma</div>
+                                    <div class="post-time">Kemarin &middot; Jakarta Selatan</div>
+                                </div>
+                                <span class="post-tag event">Event</span>
+                            </div>
+                            <div class="post-title">Bank Sampah Kelurahan Baru Dibuka! 🎉</div>
+                            <div class="post-body">
+                                Mulai minggu depan warga bisa setor sampah setiap hari Sabtu pukul 08.00–12.00.
+                                Yuk dukung lingkungan yang lebih bersih dan dapatkan poin reward dari setiap setoran!
+                            </div>
+                            <img src="https://picsum.photos/seed/recycling1/700/220" class="post-img" alt="bank sampah">
+                            <div class="post-actions">
+                                <button class="action-btn"><i class="bi bi-heart"></i> 230</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 54</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 30</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 3 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" class="avatar-img sm"
+                                    alt="Rudi Hermawan">
+                                <div class="post-meta">
+                                    <div class="post-author">Rudi Hermawan</div>
+                                    <div class="post-time">2 hari lalu &middot; Surabaya</div>
+                                </div>
+                                <span class="post-tag diskusi">Diskusi</span>
+                            </div>
+                            <div class="post-title">Bagaimana Cara Membuat Kompos dari Sisa Makanan? 🌱</div>
+                            <div class="post-body">
+                                Selama ini saya buang sisa makanan begitu saja. Ternyata bisa jadi kompos dan pupuk
+                                organik! Ada yang sudah pernah mencoba? Share pengalamannya dong teman-teman.
+                            </div>
+                            <div class="post-actions">
+                                <button class="action-btn"><i class="bi bi-heart"></i> 87</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 42</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 6</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 4 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar-img sm"
+                                    alt="Dewi Kusuma">
+                                <div class="post-meta">
+                                    <div class="post-author">Dewi Kusuma</div>
+                                    <div class="post-time">3 hari lalu &middot; Yogyakarta</div>
+                                </div>
+                                <span class="post-tag berita">Berita</span>
+                            </div>
+                            <div class="post-title">Pemerintah Targetkan Zero Waste 2030 🌍</div>
+                            <div class="post-body">
+                                Program nasional daur ulang sampah ditargetkan mengurangi 70% sampah ke TPA sebelum
+                                2030.
+                                Mari kita dukung dengan aktif berpartisipasi di bank sampah terdekat!
+                            </div>
+                            <img src="https://picsum.photos/seed/green-city/700/220" class="post-img" alt="zero waste">
+                            <div class="post-actions">
+                                <button class="action-btn"><i class="bi bi-heart"></i> 314</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 76</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 95</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 5 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="avatar-img sm"
+                                    alt="Ahmad Fauzi">
+                                <div class="post-meta">
+                                    <div class="post-author">Ahmad Fauzi</div>
+                                    <div class="post-time">4 hari lalu &middot; Bekasi</div>
+                                </div>
+                                <span class="post-tag tips">Tips</span>
+                            </div>
+                            <div class="post-title">5 Cara Hemat Energi di Rumah Tanpa Ribet ⚡</div>
+                            <div class="post-body">
+                                Matikan lampu saat siang hari, gunakan panel surya kecil untuk charger HP,
+                                dan manfaatkan angin alami daripada AC. Hemat listrik = hemat bumi!
+                            </div>
+                            <img src="https://picsum.photos/seed/solar-energy/700/220" class="post-img"
+                                alt="hemat energi">
+                            <div class="post-actions">
+                                <button class="action-btn"><i class="bi bi-heart"></i> 198</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 29</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 41</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 6 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/women/67.jpg" class="avatar-img sm"
+                                    alt="Maya Indah">
+                                <div class="post-meta">
+                                    <div class="post-author">Maya Indah</div>
+                                    <div class="post-time">4 hari lalu &middot; Semarang</div>
+                                </div>
+                                <span class="post-tag event">Event</span>
+                            </div>
+                            <div class="post-title">Workshop Daur Ulang Kertas Gratis Sabtu Ini! 📄</div>
+                            <div class="post-body">
+                                Kami mengadakan workshop membuat kertas daur ulang dari koran bekas. Terbuka untuk
+                                semua usia, tempat terbatas. Daftar sekarang dan bawa sampah kertasmu!
+                            </div>
+                            <img src="https://picsum.photos/seed/workshop-craft/700/220" class="post-img"
+                                alt="workshop daur ulang">
+                            <div class="post-actions">
+                                <button class="action-btn liked"><i class="bi bi-heart-fill"></i> 145</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 61</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 33</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 7 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/men/67.jpg" class="avatar-img sm"
+                                    alt="Hendra Wijaya">
+                                <div class="post-meta">
+                                    <div class="post-author">Hendra Wijaya</div>
+                                    <div class="post-time">5 hari lalu &middot; Medan</div>
+                                </div>
+                                <span class="post-tag diskusi">Diskusi</span>
+                            </div>
+                            <div class="post-title">Bank Sampah Digital vs Konvensional — Mana Lebih Efektif?</div>
+                            <div class="post-body">
+                                Sistem digital memudahkan pencatatan dan transparansi, tapi konvensional lebih mudah
+                                diakses warga yang tidak melek teknologi. Menurut teman-teman solusinya bagaimana?
+                            </div>
+                            <div class="post-actions">
+                                <button class="action-btn"><i class="bi bi-heart"></i> 73</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 88</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 14</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 8 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/women/11.jpg" class="avatar-img sm"
+                                    alt="Rina Safitri">
+                                <div class="post-meta">
+                                    <div class="post-author">Rina Safitri</div>
+                                    <div class="post-time">6 hari lalu &middot; Malang</div>
+                                </div>
+                                <span class="post-tag tips">Tips</span>
+                            </div>
+                            <div class="post-title">Membuat Ecobrick dari Botol Plastik Bekas 🍶</div>
+                            <div class="post-body">
+                                Isi botol plastik dengan sampah plastik kecil hingga padat, lalu gunakan sebagai
+                                bahan bangunan atau furnitur. Satu ecobrick bisa menampung ratusan gram sampah!
+                            </div>
+                            <img src="https://picsum.photos/seed/ecobrick-plastic/700/220" class="post-img"
+                                alt="ecobrick">
+                            <div class="post-actions">
+                                <button class="action-btn liked"><i class="bi bi-heart-fill"></i> 267</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 48</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 72</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 9 -->
+                        <div class="post-card mb-4 fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/men/33.jpg" class="avatar-img sm"
+                                    alt="Doni Pratama">
+                                <div class="post-meta">
+                                    <div class="post-author">Doni Pratama</div>
+                                    <div class="post-time">1 minggu lalu &middot; Surabaya</div>
+                                </div>
+                                <span class="post-tag berita">Berita</span>
+                            </div>
+                            <div class="post-title">Surabaya Raih Penghargaan Kota Zero Waste 2025 🏆</div>
+                            <div class="post-body">
+                                Kota Surabaya berhasil meraih penghargaan internasional atas keberhasilan mengelola
+                                sampah kota hingga 80% terdaur ulang. Bangga jadi warga Surabaya!
+                            </div>
+                            <img src="https://picsum.photos/seed/surabaya-city/700/220" class="post-img"
+                                alt="surabaya zero waste">
+                            <div class="post-actions">
+                                <button class="action-btn liked"><i class="bi bi-heart-fill"></i> 592</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 103</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 148</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Post 10 -->
+                        <div class="post-card fade-in">
+                            <div class="post-header">
+                                <img src="https://randomuser.me/api/portraits/women/55.jpg" class="avatar-img sm"
+                                    alt="Laila Nuraini">
+                                <div class="post-meta">
+                                    <div class="post-author">Laila Nuraini</div>
+                                    <div class="post-time">1 minggu lalu &middot; Depok</div>
+                                </div>
+                                <span class="post-tag diskusi">Diskusi</span>
+                            </div>
+                            <div class="post-title">Cara Seru Mengajarkan Anak Peduli Lingkungan 🧒</div>
+                            <div class="post-body">
+                                Libatkan anak dalam memilah sampah sejak dini, buat kompetisi mengumpulkan botol,
+                                dan berikan reward kecil. Anak yang peduli lingkungan sejak kecil = masa depan lebih
+                                baik!
+                            </div>
+                            <div class="post-actions">
+                                <button class="action-btn"><i class="bi bi-heart"></i> 211</button>
+                                <button class="action-btn"><i class="bi bi-chat"></i> 67</button>
+                                <button class="action-btn"><i class="bi bi-share"></i> 38</button>
+                                <button class="action-btn ms-auto"><i class="bi bi-bookmark"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT PANEL -->
+                    <div class="col-lg-4">
+
+                        <!-- Trending Topics -->
+                        <div class="panel-card fade-in">
+                            <div class="panel-title">
+                                <div class="panel-title-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                                Trending Hari Ini
+                            </div>
+                            <div class="trend-item">
+                                <div class="trend-num">1</div>
+                                <div style="flex:1;">
+                                    <div class="trend-name">♻ Recycling</div>
+                                    <div class="trend-bar-wrap mt-1">
+                                        <div class="trend-bar-fill" style="width:85%"></div>
+                                    </div>
+                                </div>
+                                <div class="trend-count">8.5%</div>
+                            </div>
+                            <div class="trend-item">
+                                <div class="trend-num">2</div>
+                                <div style="flex:1;">
+                                    <div class="trend-name">🌱 Eco Lifestyle</div>
+                                    <div class="trend-bar-wrap mt-1">
+                                        <div class="trend-bar-fill" style="width:62%"></div>
+                                    </div>
+                                </div>
+                                <div class="trend-count">6.2%</div>
+                            </div>
+                            <div class="trend-item">
+                                <div class="trend-num">3</div>
+                                <div style="flex:1;">
+                                    <div class="trend-name">🏘 Community Event</div>
+                                    <div class="trend-bar-wrap mt-1">
+                                        <div class="trend-bar-fill" style="width:51%"></div>
+                                    </div>
+                                </div>
+                                <div class="trend-count">5.1%</div>
+                            </div>
+                            <div class="trend-item">
+                                <div class="trend-num">4</div>
+                                <div style="flex:1;">
+                                    <div class="trend-name">🧴 Plastic Free</div>
+                                    <div class="trend-bar-wrap mt-1">
+                                        <div class="trend-bar-fill" style="width:44%"></div>
+                                    </div>
+                                </div>
+                                <div class="trend-count">4.4%</div>
+                            </div>
+                            <div class="trend-item">
+                                <div class="trend-num">5</div>
+                                <div style="flex:1;">
+                                    <div class="trend-name">🌊 Save Ocean</div>
+                                    <div class="trend-bar-wrap mt-1">
+                                        <div class="trend-bar-fill" style="width:30%"></div>
+                                    </div>
+                                </div>
+                                <div class="trend-count">3.0%</div>
+                            </div>
+                        </div>
+
+                        <!-- Suggested Communities -->
+                        <div class="panel-card fade-in">
+                            <div class="panel-title">
+                                <div class="panel-title-icon"><i class="bi bi-people-fill"></i></div>
+                                Komunitas Untukmu
+                            </div>
+                            <div class="community-item">
+                                <div class="community-icon g">🌿</div>
+                                <div>
+                                    <div class="community-name">Green Bandung</div>
+                                    <div class="community-members">2.3k anggota</div>
+                                </div>
+                                <button class="btn-join">Gabung</button>
+                            </div>
+                            <div class="community-item">
+                                <div class="community-icon t">♻</div>
+                                <div>
+                                    <div class="community-name">Zero Waste Indonesia</div>
+                                    <div class="community-members">5.8k anggota</div>
+                                </div>
+                                <button class="btn-join">Gabung</button>
+                            </div>
+                            <div class="community-item">
+                                <div class="community-icon b">🌻</div>
+                                <div>
+                                    <div class="community-name">Urban Farming Jakarta</div>
+                                    <div class="community-members">1.1k anggota</div>
+                                </div>
+                                <button class="btn-join">Gabung</button>
+                            </div>
+                            <div class="community-item">
+                                <div class="community-icon p">🌊</div>
+                                <div>
+                                    <div class="community-name">Clean Ocean ID</div>
+                                    <div class="community-members">3.4k anggota</div>
+                                </div>
+                                <button class="btn-join">Gabung</button>
+                            </div>
+                        </div>
+
+                        <!-- Eco Challenge -->
+                        <div class="panel-card fade-in">
+                            <div class="panel-title">
+                                <div class="panel-title-icon"><i class="bi bi-trophy-fill"></i></div>
+                                Tantangan Bulan Ini
+                            </div>
+                            <div class="challenge-item">
+                                <div class="challenge-icon" style="background:#E8F5E9;">🌿</div>
+                                <div style="flex:1;">
+                                    <div class="challenge-name">Setor 10 kg Minggu Ini</div>
+                                    <div class="challenge-desc">7.2 kg dari 10 kg</div>
+                                    <div class="challenge-progress">
+                                        <div class="challenge-fill" style="width:72%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="challenge-item">
+                                <div class="challenge-icon" style="background:#E0F2F1;">♻</div>
+                                <div style="flex:1;">
+                                    <div class="challenge-name">Daur Ulang Plastik 5x</div>
+                                    <div class="challenge-desc">3 dari 5 kali</div>
+                                    <div class="challenge-progress">
+                                        <div class="challenge-fill" style="width:60%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="challenge-item">
+                                <div class="challenge-icon" style="background:#FFF3E0;">🌱</div>
+                                <div style="flex:1;">
+                                    <div class="challenge-name">7 Hari Tanpa Plastik</div>
+                                    <div class="challenge-desc">5 dari 7 hari</div>
+                                    <div class="challenge-progress">
+                                        <div class="challenge-fill" style="width:71%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Members -->
+                        <div class="panel-card fade-in">
+                            <div class="panel-title">
+                                <div class="panel-title-icon"><i class="bi bi-star-fill"></i></div>
+                                Anggota Teraktif
+                            </div>
+                            <div class="member-item">
+                                <img src="https://randomuser.me/api/portraits/men/10.jpg" class="avatar-img sm"
+                                    alt="Budi Santoso">
+                                <div>
+                                    <div class="member-name">Budi Santoso</div>
+                                    <div class="member-posts">42 postingan</div>
+                                </div>
+                                <span class="member-badge gold">🥇 Top</span>
+                            </div>
+                            <div class="member-item">
+                                <img src="https://randomuser.me/api/portraits/women/22.jpg" class="avatar-img sm"
+                                    alt="Siti Rahma">
+                                <div>
+                                    <div class="member-name">Siti Rahma</div>
+                                    <div class="member-posts">38 postingan</div>
+                                </div>
+                                <span class="member-badge silver">🥈</span>
+                            </div>
+                            <div class="member-item">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" class="avatar-img sm"
+                                    alt="Rudi Hermawan">
+                                <div>
+                                    <div class="member-name">Rudi Hermawan</div>
+                                    <div class="member-posts">31 postingan</div>
+                                </div>
+                                <span class="member-badge green">🥉</span>
+                            </div>
+                            <div class="member-item">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar-img sm"
+                                    alt="Dewi Kusuma">
+                                <div>
+                                    <div class="member-name">Dewi Kusuma</div>
+                                    <div class="member-posts">27 postingan</div>
+                                </div>
+                                <span class="member-badge green">Aktif</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
